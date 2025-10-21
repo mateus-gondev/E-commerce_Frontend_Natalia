@@ -88,7 +88,7 @@ header {
 }
 
 .logo {
-    height: 70px;
+    height: 200px;
     transition: transform 0.3s ease;
     cursor: pointer;
 }
