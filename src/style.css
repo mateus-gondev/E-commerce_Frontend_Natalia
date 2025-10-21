@@ -1,0 +1,17 @@
+:root {
+    --preto: #141414;
+    --azul: #4e31d0;
+    --branco: #FFFFFF;
+    --banco-cinza: #C5C5C5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background-color: #f5f5f5;
+}
