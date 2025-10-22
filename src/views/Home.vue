@@ -54,4 +54,41 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+.carousel.slide {
+  margin-top: 18rem; 
+}
+
+.carousel.slide img {
+  width: 100%;
+  height: 600px; 
+  object-fit: cover;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5); 
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  background-size: 60%;
+  background-position: center;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+  opacity: 1; 
+}
+
+
+
+</style>
