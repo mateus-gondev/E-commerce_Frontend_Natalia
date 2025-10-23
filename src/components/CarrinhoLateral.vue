@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style scoped>
-/* Animação de transição lateral */
+
 .slide-cart-enter-active,
 .slide-cart-leave-active {
     transition: transform 0.4s ease;

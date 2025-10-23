@@ -1,20 +1,18 @@
 <template>
     <header>
         <nav class="navbar">
-            <!-- ===== LINHA SUPERIOR: LOGO ===== -->
+            
             <div class="navbar-top">
                 <img src="@/assets/imgs/logo_natalia.jpeg" alt="Logo" class="logo" />
             </div>
 
-            <!-- ===== LINHA INFERIOR ===== -->
             <div class="navbar-bottom">
-                <!-- ===== CAMPO DE PESQUISA ===== -->
+                
                 <div class="buscar">
                     <img src="@/assets/icons/iconLupa.png" alt="Buscar" />
                     <input type="text" placeholder="Encontre sua joia..." />
                 </div>
 
-                <!-- ===== LINKS CENTRALIZADOS ===== -->
                 <ul class="menu">
                     <li><router-link to="/">Home</router-link></li>
                     <li><router-link to="#">Lançamentos</router-link></li>
@@ -22,7 +20,6 @@
                     <li><router-link to="#">Contato</router-link></li>
                 </ul>
 
-                <!-- ===== LADO DIREITO: CARRINHO E BOTÕES ===== -->
                 <div class="navbar-right">
                     <div class="ms-auto d-flex align-items-center">
                         <button class="btn-carrinho" @click="abrirCarrinho" title="Ver carrinho">
@@ -62,7 +59,7 @@ export default {
 </script>
 
 <style scoped>
-/* ===== NAVBAR BASE ===== */
+
 header {
     background-color: var(--branco);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);

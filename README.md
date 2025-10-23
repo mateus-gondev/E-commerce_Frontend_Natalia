@@ -1,38 +1,79 @@
-# mateus ecommerce
+# 🛒 E-commerce Natalia - Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+<p align="start">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js" width="40" height="40"/>
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="40" height="40"/>
+</p>
 
-## Recommended IDE Setup
+Projeto de E-commerce em desenvolvido com **VUE JS**, com o objetivo de criar uma aplicação web funcional e organizada para fins acadêmicos e de aprendizado.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Recommended Browser Setup
+## 🚀 Como executar o projeto
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+Siga o passo a passo abaixo para configurar e executar o projeto corretamente em sua máquina.
 
-## Customize configuration
+### 1️⃣ Clonar o repositório
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+```bash
+git clone https://github.com/mateus-gondev/E-commerce_Frontend_Natalia.git
+cd E-commerce_Frontend_Natalia #Nome da pasta do projeto
+```
 
-## Project Setup
-
-```sh
+### 2️ Instalar as dependências
+```bash
 npm install
+ 
+# Utilize o npm vue-router para trabalhar com as rotas
+npm instal vue-router
+
 ```
 
-### Compile and Hot-Reload for Development
+Verifique se os pacotes foram instalados corretamente:
+```bash
+npm list vue
 
-```sh
-npm run dev
+#E tambem utilize o npm list para as outras dependencias
+npm list
 ```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
+### 3️⃣ Executar o projeto
+```bash
+npm run dev #Para rodar o projeto
 ```
+
+---
+
+## 🔄 Fluxo de trabalho com o Git
+Quando estiver com o projeto em sua maquina sempre siga o fluxo abaixo para evitar conflitos e manter o código atualizado.
+
+### 1️⃣ Antes de começar qualquer modificação
+```bash
+git pull origin main # Baixa todas as atualizações do repositório remoto antes de começar a trabalhar.
+```
+
+### 2️⃣ Após realizar alterações
+Adicione todos os arquivos modificados:
+
+```bash
+git add .
+```
+
+Crie um commit com uma mensagem descritiva:
+
+```bash
+git commit -m "Descrição das alterações feitas"
+```
+
+Envie suas mudanças para o repositório remoto:
+
+```bash
+git push origin main # Envia suas alterações para o repositório
+```
+
+---
+
+### 🗄️ Banco de Dados
+O projeto utiliza MySQL Server em conjunto com o MySQL Workbench.
+⚠️ Observação: o banco de dados ainda está em desenvolvimento.
