@@ -14,10 +14,10 @@
                 </div>
 
                 <ul class="menu">
-                    <li><router-link to="/">Home</router-link></li>
-                    <li><router-link to="#">Lançamentos</router-link></li>
-                    <li><router-link to="#">Produtos</router-link></li>
-                    <li><router-link to="#">Contato</router-link></li>
+                    <li class="link"><router-link to="/">Home</router-link></li>
+                    <li class="link"><router-link to="#">Lançamentos</router-link></li>
+                    <li class="link"><router-link to="#">Produtos</router-link></li>
+                    <li class="link"><router-link to="#">Contato</router-link></li>
                 </ul>
 
                 <div class="navbar-right">
@@ -30,11 +30,11 @@
                     <CarrinhoLateral ref="carrinhoRef" />
 
                     <div class="cadastro">
-                        <a href="#">Registre-se</a>
+                        <a class="cad-a" href="#">Registre-se</a>
                     </div>
 
                     <div class="login">
-                        <a href="#">Login</a>
+                        <a class="log-a" href="#">Login</a>
                     </div>
                 </div>
             </div>
@@ -60,21 +60,32 @@ export default {
 
 <style scoped>
 
+:root {
+    --preto: #141414;
+    --azul: #4e31d0;
+    --branco: #FFFFFF;
+    --banco-cinza: #C5C5C5;
+}
+
 header {
-    background-color: var(--branco);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
-    z-index: 1000;
-    padding: 10px 0;
+    z-index: 9999;
+    background-color: var(--branco);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    position: sticky; 
+    top: 0;
+    z-index: 1050; 
+    background-color: #fff; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 /* ===== LOGO ===== */
@@ -85,7 +96,7 @@ header {
 }
 
 .logo {
-    height: 200px;
+    height: 150px;
     transition: transform 0.3s ease;
     cursor: pointer;
 }
@@ -143,7 +154,7 @@ header {
     gap: 25px;
 }
 
-.menu li {
+.menu .link li {
     display: flex;
     align-items: center;
 }
@@ -155,7 +166,7 @@ header {
     font-weight: 300;
 }
 
-.menu li a {
+.menu .link a {
     text-decoration: none;
     color: var(--preto);
     font-weight: 600;
@@ -163,7 +174,7 @@ header {
     transition: color 0.3s ease;
 }
 
-.menu li a:hover {
+.menu .link a:hover {
     color: var(--azul);
 }
 
@@ -186,8 +197,8 @@ header {
 }
 
 /* ===== BOTÕES ===== */
-.cadastro a,
-.login a {
+.cadastro .cad-a,
+.login .log-a {
     text-decoration: none;
     font-weight: 600;
     border-radius: 17px;
@@ -196,21 +207,21 @@ header {
     display: inline-block;
 }
 
-.cadastro a {
+.cadastro .cad-a {
     background-color: var(--azul);
     color: var(--branco);
 }
 
-.cadastro a:hover {
-    background-color: rgb(33, 80, 199);
+.cadastro .cad-a:hover {
+    background-color: #3e27b5;
 }
 
-.login a {
+.login .log-a {
     background-color: var(--banco-cinza);
     color: var(--preto);
 }
 
-.login a:hover {
+.login .log-a:hover {
     background-color: #e6e6e6;
 }
 

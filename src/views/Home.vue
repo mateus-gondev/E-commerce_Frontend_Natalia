@@ -1,90 +1,67 @@
 <template>
-
-    <!--Importação - NAVBAR-->
     <div class="header">
         <navbar />
     </div>
 
-    <!--Banner das joias-->
-    < <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
-        </div>
-
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="@/assets/imgs/banner1.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-                <img src="@/assets/imgs/banner2.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-                <img src="@/assets/imgs/banner3.jpg" class="d-block w-100" alt="..." />
+    <main>
+        <!-- Banner -->
+        <div class="container-banner">
+            <div class="fundo">
+                <h1 class="fw-light">Descrição</h1>
+                <p class="letras">
+                    Something short and leading about the collection below—its contents,
+                    the creator, etc. Make it short and sweet, but not too short so folks
+                    don’t simply skip over it entirely.
+                </p>
+                <p><a href="#" class="btn btn-primary my-2">Comprar Agora</a></p>
             </div>
         </div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Próximo</span>
-        </button>
-        </div>
-
+        <!-- Cards -->
+        <Cards />
+    </main>
 </template>
+
 
 <script>
 import navbar from '@/components/navbar.vue'
+import Cards from '@/components/Cards.vue'
 
 export default {
     name: "Home",
     components: {
-        navbar
+        navbar,
+        Cards
     }
 
 };
 </script>
 
 <style scoped>
-    .carousel.slide {
-        margin-top: 18rem;
-    }
+.header {
+    position: relative;
+    z-index: 1000;
+}
 
-    .carousel.slide img {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-    }
+main {
+    padding-top: 16rem;
+}
 
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        background-size: 60%;
-        background-position: center;
-    }
+.container-banner {
+    text-align: center;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+    max-width: 1200px;
+}
 
-    .carousel-control-prev-icon:hover,
-    .carousel-control-next-icon:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-        transform: scale(1.1);
-        transition: all 0.3s ease;
-    }
+.fundo {
+    color: rgb(0, 0, 0);
+}
 
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 5%;
-        opacity: 1;
-    }
+.container-fundo {
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
 </style>
