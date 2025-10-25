@@ -89,28 +89,32 @@
 
         </div>
 
-
-
-
         <!-- Cards -->
         <Cards />
 
+        
+
     </main>
+    <footer>
+        <Footer />
+    </footer>
 </template>
 
 
 <script>
 import navbar from '@/components/navbar.vue'
 import Cards from '@/components/Cards.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
     name: "Home",
     components: {
         navbar,
-        Cards
+        Cards,
+        Footer
     }
-
-};
+}
+    
 </script>
 
 <style scoped>

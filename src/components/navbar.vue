@@ -15,7 +15,7 @@
 
                 <ul class="menu">
                     <li class="link"><router-link to="/">Home</router-link></li>
-                    <li class="link"><router-link to="#">Lançamentos</router-link></li>
+                    <li class="link"><router-link to="#">Categorias</router-link></li>
                     <li class="link"><router-link to="#">Produtos</router-link></li>
                     <li class="link"><router-link to="#">Contato</router-link></li>
                 </ul>
@@ -88,7 +88,6 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
-/* ===== LOGO ===== */
 .navbar-top {
     display: flex;
     justify-content: center;
@@ -105,7 +104,6 @@ header {
     transform: scale(1.08);
 }
 
-/* ===== LINHA INFERIOR ===== */
 .navbar-bottom {
     display: flex;
     justify-content: space-between;
@@ -116,7 +114,6 @@ header {
     margin-top: 8px;
 }
 
-/* ===== CAMPO DE PESQUISA ===== */
 .buscar {
     display: flex;
     align-items: center;
@@ -175,17 +172,17 @@ header {
 }
 
 .menu .link a:hover {
-    color: var(--azul);
+    color: rgb(214, 171, 41);
 }
 
-/* ===== LADO DIREITO ===== */
 .navbar-right {
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-bottom: 15px;
 }
 
-/* ===== CARRINHO ===== */
+
 .carrinho img {
     width: 28px;
     cursor: pointer;
@@ -196,7 +193,6 @@ header {
     transform: scale(1.1);
 }
 
-/* ===== BOTÕES ===== */
 .cadastro .cad-a,
 .login .log-a {
     text-decoration: none;
@@ -213,7 +209,7 @@ header {
 }
 
 .cadastro .cad-a:hover {
-    background-color: #3e27b5;
+    background-color: #e6e6e6;
 }
 
 .login .log-a {
@@ -225,7 +221,6 @@ header {
     background-color: #e6e6e6;
 }
 
-/* ===== BOTÃO CARRINHO ===== */
 .btn-carrinho {
     background: none;
     border: none;
@@ -272,10 +267,6 @@ header {
 
     .buscar {
         width: 80%;
-    }
-
-    .navbar-right {
-        flex-direction: column;
     }
 
     .logo {
