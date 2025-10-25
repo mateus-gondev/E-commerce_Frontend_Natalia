@@ -14,10 +14,10 @@
                 </div>
 
                 <ul class="menu">
-                    <li class="link"><router-link to="/">Home</router-link></li>
-                    <li class="link"><router-link to="#">Categorias</router-link></li>
-                    <li class="link"><router-link to="#">Produtos</router-link></li>
-                    <li class="link"><router-link to="#">Contato</router-link></li>
+                    <li class="link"><a href="#">Home</a></li>
+                    <li class="link"><a href="#cate">Categorias</a></li>
+                    <li class="link"><a href="#pro">Produtos</a></li>
+                    <li class="link"><a href="#con">Contato</a></li>
                 </ul>
 
                 <div class="navbar-right">

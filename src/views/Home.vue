@@ -52,36 +52,35 @@
             </div>
         </div>
 
-        <h2 class="titulo-categoria">Encontre a sua joia</h2>
+        <h2 class="titulo-categoria" id="cate">Encontre a sua joia</h2>
         <p class="subtitulo-categoria">Luxo e design para quem é livre para brilhar</p>
-
 
         <!--Categorias-->
         <div class="container-categoria">
 
             <!--Cad-Categoria-->
-            <div class="col-lg-4"> 
+            <div class="col-lg-4">
                 <img src="@/assets/imgs/categoria1.png" class="d-block w-100" alt="Cat" />
                 <h2 class="fw-normal">Anéis</h2>
                 <p><a class="btn btn-secondary" href="#">Ver detalhes »</a></p>
             </div>
 
             <!--Cad-Categoria-->
-            <div class="col-lg-4"> 
+            <div class="col-lg-4">
                 <img src="@/assets/imgs/categoria2.png" class="d-block w-100" alt="Cat" />
                 <h2 class="fw-normal">Anéis</h2>
                 <p><a class="btn btn-secondary" href="#">Ver detalhes »</a></p>
             </div>
 
             <!--Cad-Categoria-->
-            <div class="col-lg-4"> 
+            <div class="col-lg-4">
                 <img src="@/assets/imgs/categoria3.png" class="d-block w-100" alt="Cat" />
                 <h2 class="fw-normal">Anéis</h2>
                 <p><a class="btn btn-secondary" href="#">Ver detalhes »</a></p>
             </div>
 
             <!--Cad-Categoria-->
-            <div class="col-lg-4"> 
+            <div class="col-lg-4">
                 <img src="@/assets/imgs/categoria4.png" class="d-block w-100" alt="Cat" />
                 <h2 class="fw-normal">Anéis</h2>
                 <p><a class="btn btn-secondary" href="#">Ver detalhes »</a></p>
@@ -90,12 +89,30 @@
         </div>
 
         <!-- Cards -->
-        <Cards />
+        <div id="pro">
+            <Cards />
+        </div>
 
-        
+        <!-- Pontos forte-->
+        <div class="container-detalhe">
+            <h2 class="titulo-secao">Joias que Contam Histórias</h2>
+            <p class="subtitulo-secao">
+                Cada peça é cuidadosamente selecionada e criada para celebrar seus momentos mais especiais
+            </p>
+
+            <div class="detalhes-grid">
+                <div v-for="(item, index) in detalhes" :key="index" class="detalhe-card">
+                    <div class="icone">
+                        <img :src="item.img" :alt="item.title" />
+                    </div>
+                    <h3 class="titulo">{{ item.title }}</h3>
+                    <p class="descricao">{{ item.subtitle }}</p>
+                </div>
+            </div>
+        </div>
 
     </main>
-    <footer>
+    <footer id="con">
         <Footer />
     </footer>
 </template>
@@ -112,12 +129,37 @@ export default {
         navbar,
         Cards,
         Footer
+    },
+    data() {
+        return {
+            detalhes: [
+                {
+                img: "https://img.icons8.com/ios-filled/50/star--v1.png",
+                title: "Qualidade Premium",
+                subtitle: "Apenas as melhores pedras e metais preciosos"
+                },
+                {
+                img: "https://img.icons8.com/ios-filled/50/contract.png",
+                title: "Certificação",
+                subtitle: "Todas as peças com certificado de autenticidade"
+                },
+                {
+                img: "https://img.icons8.com/ios-glyphs/30/delivery--v1.png",
+                title: "Entrega Rapida",
+                subtitle: "Proteção completa para suas joias favoritas"
+                }
+            ]
+        };
     }
-}
+};
     
 </script>
 
 <style scoped>
+html {
+    scroll-behavior: smooth;
+}
+
 .header {
     position: relative;
     z-index: 1000;
@@ -133,7 +175,6 @@ main {
     overflow: hidden;
     margin-top: 4rem;
 }
-
 
 .carousel-item img {
     width: 100%;
@@ -199,7 +240,6 @@ main {
     }
 }
 
-/* ====== CONTAINER DE CATEGORIAS ====== */
 .container-categoria {
     display: flex;
     flex-wrap: wrap;
@@ -211,7 +251,6 @@ main {
     text-align: center;
 }
 
-/* ====== CARD INDIVIDUAL ====== */
 .col-lg-4 {
     width: 220px;
     background: #fff;
@@ -309,5 +348,63 @@ main {
     }
 }
 
+/**Detalhes Selection */
+.container-detalhe {
+    background-color: #1e1e26;
+    color: #fff;
+    text-align: center;
+    padding: 4rem 2rem;
+}
 
+.titulo-secao {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.subtitulo-secao {
+    color: #c5c5c5;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+.detalhes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+}
+
+.detalhe-card {
+    max-width: 250px;
+}
+
+.icone {
+    background-color: #0f172a;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icone img {
+    width: 40px;
+    height: 40px;
+    filter: invert(1) brightness(2);
+}
+
+.titulo {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.descricao {
+    color: #a5a5a5;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
 </style>
