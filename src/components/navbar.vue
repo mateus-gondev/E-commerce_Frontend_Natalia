@@ -1,13 +1,12 @@
 <template>
-    <header>
+    <header :class="{ 'scrolled': isScrolled }">
         <nav class="navbar">
-            
-            <div class="navbar-top">
+
+            <div class="navbar-top" v-show="!isScrolled">
                 <img src="@/assets/imgs/logo_natalia.jpeg" alt="Logo" class="logo" />
             </div>
 
             <div class="navbar-bottom">
-                
                 <div class="buscar">
                     <img src="@/assets/icons/iconLupa.png" alt="Buscar" />
                     <input type="text" placeholder="Encontre sua joia..." />
@@ -21,11 +20,9 @@
                 </ul>
 
                 <div class="navbar-right">
-                    <div class="ms-auto d-flex align-items-center">
-                        <button class="btn-carrinho" @click="abrirCarrinho" title="Ver carrinho">
-                            <img src="@/assets/icons/iconCarrinho.png" alt="Carrinho" />
-                        </button>
-                    </div>
+                    <button class="btn-carrinho" @click="abrirCarrinho" title="Ver carrinho">
+                        <img src="@/assets/icons/iconCarrinho.png" alt="Carrinho" />
+                    </button>
 
                     <CarrinhoLateral ref="carrinhoRef" />
 
@@ -43,23 +40,35 @@
 </template>
 
 <script>
-import CarrinhoLateral from "../components/CarrinhoLateral.vue";
+import CarrinhoLateral from "./CarrinhoLateral.vue";
 
 export default {
-    name: "navbar",
-    components: {
-        CarrinhoLateral
+    name: "Navbar",
+    components: { CarrinhoLateral },
+    data() {
+        return {
+            isScrolled: false,
+        };
+    },
+    mounted() {
+        window.addEventListener("scroll", this.handleScroll);
+    },
+    beforeUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
     },
     methods: {
+        handleScroll() {
+            this.isScrolled = window.scrollY > 80; // ao rolar mais de 80px, ativa o modo compacto
+        },
         abrirCarrinho() {
-            this.$refs.carrinhoRef.abrirCarrinho();
+            this.$refs.carrinhoRef.toggleCarrinho();
         },
     },
 };
 </script>
 
-<style scoped>
 
+<style scoped>
 :root {
     --preto: #141414;
     --azul: #4e31d0;
@@ -81,11 +90,11 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: sticky; 
+    position: sticky;
     top: 0;
-    z-index: 1050; 
-    background-color: #fff; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    z-index: 1050;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-top {
@@ -272,5 +281,32 @@ header {
     .logo {
         height: 60px;
     }
+}
+
+/* ===== ANIMAÇÃO SCROLL ===== */
+header {
+    transition: all 0.4s ease;
+}
+
+header.scrolled {
+    background-color: #ffffffcc;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+header.scrolled .navbar {
+    padding: 6px 0;
+}
+
+header.scrolled .navbar-bottom {
+    padding: 4px 0;
+}
+
+header.scrolled .logo {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+    transition: all 0.3s ease;
 }
 </style>

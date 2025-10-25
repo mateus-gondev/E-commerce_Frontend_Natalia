@@ -17,3 +17,6 @@ body{
     overflow-x: hidden;
 }
 
+html {
+    scroll-behavior: smooth; /**Deixa o scroll do mouse suave*/
+}
