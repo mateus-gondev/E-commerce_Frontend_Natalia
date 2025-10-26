@@ -132,7 +132,7 @@ header {
     width: 85%;
     padding: 10px 0;
     border-top: 1px solid var(--banco-cinza);
-    margin-top: 8px;
+    margin-bottom: 20px;
 }
 
 .buscar {
@@ -249,7 +249,6 @@ header {
     transform: scale(0.9);
 }
 
-
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 950px) {
     .navbar-bottom {
@@ -292,6 +291,8 @@ header.scrolled .navbar {
 
 header.scrolled .navbar-bottom {
     padding: 4px 0;
+    margin-top: 10px;
+    margin-bottom: -5px;
 }
 
 header.scrolled .logo {

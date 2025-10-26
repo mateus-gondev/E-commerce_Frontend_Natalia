@@ -53,15 +53,18 @@
 
             </div>
 
-            <!-- Botões do carrossel -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Próximo</span>
-            </button>
+            <div class="cont-btn">
+                <!-- Botões do carrossel -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
+            </div>
+
         </div>
     </div>
 </template>
@@ -195,6 +198,29 @@ export default {
     transform: scale(1.05);
 }
 
+.cont-btn{
+    gap: 16rem;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.9;
+}
+
+/* empurra os botões um pouco pra fora */
+.carousel-control-prev {
+    margin-top: 80px;
+    left: 10px; 
+}
+
+.carousel-control-next {
+    margin-top: 80px;
+    right: 10px;
+}
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-color: rgba(0, 0, 0, 0.45);
@@ -210,6 +236,8 @@ export default {
     background-color: rgba(0, 0, 0, 0.75);
     transform: scale(1.1);
 }
+
+
 
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {

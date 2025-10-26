@@ -22,9 +22,13 @@
                 <i class="fas fa-user-circle fa-4x mb-4 text-warning"></i>
                 <p class="fw-semibold text-dark">Realize seu login</p>
 
-                <router-link to="/login" class="btn-login-entrar">
+                <button 
+                    class="btn-login-entrar"
+                    @click="irParaLogin"
+                >
                     Entrar
-                </router-link>
+                </button>
+
             </div>
         </div>
     </transition>
@@ -45,6 +49,12 @@ export default {
         fecharMenu() {
             this.loginAberto = false;
         },
+        irParaLogin() {
+            this.fecharMenu();
+            setTimeout(() => {
+            this.$router.push('/login');
+            }, 350); // espera o slide fechar antes de mudar a rota
+        }
     },
 };
 </script>

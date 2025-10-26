@@ -112,9 +112,9 @@
         </div>
 
     </main>
-    <footer id="con">
+    <div id="con">
         <Footer />
-    </footer>
+    </div>
 </template>
 
 

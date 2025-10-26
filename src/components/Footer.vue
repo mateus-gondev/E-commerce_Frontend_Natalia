@@ -39,12 +39,16 @@
 
 <script>
     export default{
-        name: "footer"
+        name: "Footer"
     }
 
 </script>
 
 <style scoped>
+
+.container-footer{
+    width: 95%;
+}
 
 .logo-footer{
     height: 170px;
