@@ -20,19 +20,24 @@
                 </ul>
 
                 <div class="navbar-right">
-                    <button class="btn-carrinho" @click="abrirCarrinho" title="Ver carrinho">
-                        <img src="@/assets/icons/iconCarrinho.png" alt="Carrinho" />
-                    </button>
+                    <div class="ms-auto d-flex align-items-center">
+                        <button class="btn-carrinho" @click="abrirCarrinho" title="Ver carrinho">
+                            <img src="@/assets/icons/iconCarrinho.png" alt="Carrinho" />
+                        </button>
+                    </div>
 
                     <CarrinhoLateral ref="carrinhoRef" />
 
-                    <div class="cadastro">
-                        <a class="cad-a" href="#">Registre-se</a>
+                    <p class="divisao"> | </p>
+
+                    <div class="cont-bentrar">
+                        <button class="btn-Entrar" @click="abrirMenu" title="Entrar">
+                            <img src="@/assets/icons/iconEntrar.png" alt="Ent" />
+                        </button>
                     </div>
 
-                    <div class="login">
-                        <a class="log-a" href="#">Login</a>
-                    </div>
+                    <ModalLogin ref="modalRef"/>
+
                 </div>
             </div>
         </nav>
@@ -40,11 +45,15 @@
 </template>
 
 <script>
-import CarrinhoLateral from "./CarrinhoLateral.vue";
+import CarrinhoLateral from "../components/CarrinhoLateral.vue";
+import ModalLogin from "../components/Login/ModalLogin.vue";
 
 export default {
-    name: "Navbar",
-    components: { CarrinhoLateral },
+    name: "navbar",
+    components: { 
+        CarrinhoLateral,
+        ModalLogin
+    },
     data() {
         return {
             isScrolled: false,
@@ -61,7 +70,10 @@ export default {
             this.isScrolled = window.scrollY > 80; // ao rolar mais de 80px, ativa o modo compacto
         },
         abrirCarrinho() {
-            this.$refs.carrinhoRef.toggleCarrinho();
+            this.$refs.carrinhoRef.abrirCarrinho();
+        },
+        abrirMenu() {
+            this.$refs.modalRef.abrirMenu();
         },
     },
 };
@@ -158,6 +170,7 @@ header {
     display: flex;
     align-items: center;
     gap: 25px;
+    margin-right: 180px;
 }
 
 .menu .link li {
@@ -202,34 +215,11 @@ header {
     transform: scale(1.1);
 }
 
-.cadastro .cad-a,
-.login .log-a {
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 17px;
-    padding: 6px 14px;
-    transition: all 0.3s ease;
-    display: inline-block;
+.divisao{
+    margin-top: 15px;
 }
 
-.cadastro .cad-a {
-    background-color: var(--azul);
-    color: var(--branco);
-}
-
-.cadastro .cad-a:hover {
-    background-color: #e6e6e6;
-}
-
-.login .log-a {
-    background-color: var(--banco-cinza);
-    color: var(--preto);
-}
-
-.login .log-a:hover {
-    background-color: #e6e6e6;
-}
-
+.btn-Entrar,
 .btn-carrinho {
     background: none;
     border: none;
@@ -241,6 +231,7 @@ header {
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
+.btn-Entrar img,
 .btn-carrinho img {
     width: 26px;
     height: 26px;
@@ -248,6 +239,7 @@ header {
     filter: brightness(0) saturate(100%) invert(15%) sepia(7%) saturate(700%) hue-rotate(180deg) brightness(90%) contrast(90%);
 }
 
+.btn-Entrar:hover img,
 .btn-carrinho:hover img {
     transform: scale(1.15);
     filter: brightness(0) saturate(100%) invert(40%) sepia(90%) saturate(1000%) hue-rotate(200deg);
