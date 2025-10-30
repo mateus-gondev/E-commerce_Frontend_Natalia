@@ -1,33 +1,26 @@
 <template>
-    <div class="register-page">
+    <div class="login-page">
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-7">
-                    <div class="register-card bg-white rounded shadow p-4 p-md-5">
+                    <div class="login-card bg-white rounded shadow p-4 p-md-5">
                         <div class="text-center mb-4">
                             <i class="bi bi-gem fs-1 text-gold"></i>
-                            <h2 class="fw-bold mt-3 text-dark">Criar Conta</h2>
-                            <p class="text-muted">Junte-se a nós hoje</p>
+                            <h2 class="fw-bold mt-3 text-dark">Bem-vindo de volta</h2>
+                            <p class="text-muted">Entre com sua conta</p>
                         </div>
 
                         <form>
                             <div class="mb-3">
-                                <label for="name" class="form-label fw-semibold">Nome Completo</label>
-                                <input type="text" class="form-control" id="name" placeholder="Seu nome completo"
-                                    required />
-                            </div>
-
-                            <div class="mb-3">
                                 <label for="email" class="form-label fw-semibold">E-mail</label>
-                                <input type="email" class="form-control" id="email" placeholder="seu@email.com"
-                                    required />
+                                <input type="email" class="form-control" id="email" placeholder="name@example.com" />
                             </div>
 
                             <div class="mb-3 position-relative">
                                 <label for="password" class="form-label fw-semibold">Senha</label>
                                 <div class="input-group">
                                     <input :type="mostrarSenha ? 'text' : 'password'" class="form-control" id="password"
-                                        placeholder="Mínimo 6 caracteres" v-model="password" required />
+                                        placeholder="********" v-model="password" />
                                     <span class="input-group-text bg-light toggle-password"
                                         @click="mostrarSenha = !mostrarSenha">
                                         <i
@@ -38,17 +31,23 @@
 
 
                             <button type="submit" class="btn btn-gold w-100 btn-lg mb-3">
-                                <i class="bi bi-person-plus me-2"></i>
-                                Criar Conta
+                                <i class="bi bi-box-arrow-in-right me-2"></i>
+                                Entrar
                             </button>
+
+                            <div class="text-center">
+                                <router-link to="/redefinir" class="text-decoration-none text-gold">
+                                    Esqueceu sua senha?
+                                </router-link>
+                            </div>
                         </form>
 
                         <hr class="my-4" />
 
                         <div class="text-center">
-                            <p class="text-muted mb-2">Já tem uma conta?</p>
-                            <router-link to="/login" class="btn btn-outline-gold w-100 mb-3">
-                                Fazer Login
+                            <p class="text-muted mb-2">Não tem uma conta?</p>
+                            <router-link to="/cadastro" class="btn btn-outline-gold w-100 mb-3">
+                                Criar Conta
                             </router-link>
 
                             <router-link to="/" class="btn btn-light w-100 border">
@@ -64,26 +63,25 @@
 
 <script>
 export default {
-    name: "FormCadastro",
+    name: "Login",
     data() {
         return {
             password: "",
             mostrarSenha: false,
         };
     },
-
 };
 </script>
 
 <style scoped>
-.register-page {
+.login-page {
     min-height: 100vh;
     background: linear-gradient(135deg, #fff8e7 0%, #f5e1b9 100%);
     display: flex;
     align-items: center;
 }
 
-.register-card {
+.login-card {
     animation: fadeInUp 0.6s ease;
     border: 1px solid #eee;
 }
@@ -134,4 +132,5 @@ export default {
         transform: translateY(0);
     }
 }
+
 </style>
