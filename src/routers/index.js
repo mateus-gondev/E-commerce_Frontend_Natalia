@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Cadastro from '../views/Cadastro.vue';
+import Redefinir from '../views/Redefinir.vue';
 
 const routes = [
     {
@@ -18,6 +19,11 @@ const routes = [
         path: '/cadastro',
         name: 'Cadastro',
         component: Cadastro,
+    },
+    {
+        path: '/redefinir',
+        name: 'Redefinir',
+        component: Redefinir,
     }
 ];
 

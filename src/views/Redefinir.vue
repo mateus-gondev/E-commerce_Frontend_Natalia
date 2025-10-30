@@ -1,53 +1,40 @@
 <template>
-    <div class="login-page">
+    <div class="reset-page">
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-7">
-                    <div class="login-card bg-white rounded shadow p-4 p-md-5">
+                    <div class="reset-card bg-white rounded shadow p-4 p-md-5">
                         <div class="text-center mb-4">
                             <i class="bi bi-gem fs-1 text-gold"></i>
-                            <h2 class="fw-bold mt-3 text-dark">Bem-vindo de volta</h2>
-                            <p class="text-muted">Entre com sua conta</p>
+                            <h2 class="fw-bold mt-3 text-dark">Redefinir Senha</h2>
+                            <p class="text-muted">
+                                Insira seu e-mail para receber o link de redefinição de senha
+                            </p>
                         </div>
 
-                        <form>
-                            <div class="mb-3">
+                        <form @submit.prevent="enviarEmail">
+                            <div class="mb-4">
                                 <label for="email" class="form-label fw-semibold">E-mail</label>
-                                <input type="email" class="form-control" id="email" placeholder="name@example.com" />
-                            </div>
-
-                            <div class="mb-3 position-relative">
-                                <label for="password" class="form-label fw-semibold">Senha</label>
                                 <div class="input-group">
-                                    <input :type="mostrarSenha ? 'text' : 'password'" class="form-control" id="password"
-                                        placeholder="********" v-model="password" />
-                                    <span class="input-group-text bg-light toggle-password"
-                                        @click="mostrarSenha = !mostrarSenha">
-                                        <i
-                                            :class="mostrarSenha ? 'bi bi-eye-slash text-gold' : 'bi bi-eye text-gold'"></i>
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-envelope text-gold"></i>
                                     </span>
+                                    <input type="email" class="form-control" id="email" v-model="email"
+                                        placeholder="seu@email.com" required />
                                 </div>
                             </div>
 
-
                             <button type="submit" class="btn btn-gold w-100 btn-lg mb-3">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>
-                                Entrar
+                                <i class="bi bi-send me-2"></i>
+                                Enviar Link de Redefinição
                             </button>
-
-                            <div class="text-center">
-                                <router-link to="/redefinir" class="text-decoration-none text-gold">
-                                    Esqueceu sua senha?
-                                </router-link>
-                            </div>
                         </form>
 
                         <hr class="my-4" />
 
                         <div class="text-center">
-                            <p class="text-muted mb-2">Não tem uma conta?</p>
-                            <router-link to="/cadastro" class="btn btn-outline-gold w-100 mb-3">
-                                Criar Conta
+                            <router-link to="/login" class="btn btn-outline-gold w-100 mb-3">
+                                <i class="bi bi-box-arrow-in-right me-2"></i> Voltar ao Login
                             </router-link>
 
                             <router-link to="/" class="btn btn-light w-100 border">
@@ -62,26 +49,32 @@
 </template>
 
 <script>
+
 export default {
-    name: "FormLogin",
+    name: "Redefinir",
     data() {
         return {
-            password: "",
-            mostrarSenha: false,
+            email: "",
         };
+    },
+    methods: {
+        enviarEmail() {
+            alert(`Um link de redefinição foi enviado para ${this.email}`);
+            this.email = "";
+        },
     },
 };
 </script>
 
 <style scoped>
-.login-page {
+.reset-page {
     min-height: 100vh;
     background: linear-gradient(135deg, #fff8e7 0%, #f5e1b9 100%);
     display: flex;
     align-items: center;
 }
 
-.login-card {
+.reset-card {
     animation: fadeInUp 0.6s ease;
     border: 1px solid #eee;
 }
@@ -111,15 +104,24 @@ export default {
     background-color: #c1a25f;
     color: white;
 }
-.toggle-password {
-    cursor: pointer;
+
+.form-control {
     border-left: none;
 }
 
-.toggle-password:hover {
-    background-color: #fff8e7;
+.input-group-text {
+    border-right: none;
 }
 
+.form-control:focus {
+    box-shadow: none;
+    border-color: #c1a25f;
+}
+
+.input-group:focus-within .input-group-text {
+    border-color: #c1a25f;
+    color: #c1a25f;
+}
 
 @keyframes fadeInUp {
     from {
@@ -132,5 +134,4 @@ export default {
         transform: translateY(0);
     }
 }
-
 </style>
