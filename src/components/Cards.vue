@@ -5,7 +5,7 @@
 
                 <h2 class="titulo-categoria">Nossos Produtos</h2>
                 <p class="subtitulo-categoria">Luxo e design para quem é livre para brilhar</p>
-
+                
                 <!-- SLIDE 1 -->
                 <div class="carousel-item active">
                     <div class="card-group">
@@ -92,6 +92,12 @@ export default {
                     title: "Anel Brilhante",
                     desc: "Anel delicado em ouro 18k com pedras de zircônia.",
                     preco: "R$ 180,00"
+                },
+                {
+                    img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_encanto_2mm_anel_solitario_109_1_80e2a18588a47e1153771a7cb2a33777.jpeg",
+                    title: "Anel Brilhante",
+                    desc: "Anel delicado em ouro 18k com pedras de zircônia.",
+                    preco: "R$ 200,00"
                 }
             ]
         };

@@ -85,35 +85,8 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-
 export default {
-    name: "Register",
-    setup() {
-        const router = useRouter();
-        const name = ref("");
-        const email = ref("");
-        const password = ref("");
-        const confirmPassword = ref("");
-
-        const handleRegister = () => {
-            if (password.value !== confirmPassword.value) {
-                alert("As senhas não coincidem!");
-                return;
-            }
-
-            console.log("Register:", {
-                name: name.value,
-                email: email.value,
-                password: password.value,
-            });
-
-            router.push("/login");
-        };
-
-        return { name, email, password, confirmPassword, handleRegister };
-    },
+    name: "Cadastro"
 };
 </script>
 

@@ -2,7 +2,6 @@
     <div class="header">
         <navbar />
     </div>
-
     <main>
         <!-- Banner -->
         <div class="container-carrossel">
