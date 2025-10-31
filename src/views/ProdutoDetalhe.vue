@@ -59,11 +59,6 @@ export default {
             produto: null
         };
     },
-    watch: {
-        '$route.params.id'(novoId) {
-            this.carregarProduto(novoId);
-        }
-    },
     methods: {
         carregarProduto(id) {
             const produtos = [
@@ -97,12 +92,17 @@ export default {
                 }
             ];
 
-            this.produto = produtos.find(p => p.id == id);
+            this.produto = produtos.find(p => Number(p.id) === Number(id)) || null;
         }
     },
     created() {
         const id = this.$route.params.id;
         this.carregarProduto(id);
+    },
+    watch: {
+        '$route.params.id'(novoId) {
+        this.carregarProduto(novoId);
+        }
     }
 
 };

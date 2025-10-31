@@ -7,8 +7,8 @@
                 <div class="carousel-item active">
                     <div class="card-group">
                         <div class="card" v-for="(card, index) in cards" :key="'slide1-' + index">
-                            <img :src="card.img" class="card-img-top" :alt="card.title" @click="verDetalhes(index)"
-                                style="cursor: pointer;" />
+                            <img :src="card.img" class="card-img-top" :alt="card.title" @click="verDetalhes(card.id)"/>
+                            
 
                             <div class="card-body">
                                 <h5 class="card-title">{{ card.title }}</h5>
@@ -24,8 +24,8 @@
                 <div class="carousel-item">
                     <div class="card-group">
                         <div class="card" v-for="(card, index) in cards" :key="'slide2-' + index">
-                            <img :src="card.img" class="card-img-top" :alt="card.title" @click="verDetalhes(index)"
-                                style="cursor: pointer;" />
+                            <img :src="card.img" class="card-img-top" :alt="card.title" @click="verDetalhes(card.id)"/>
+                            
                             <div class="card-body">
                                 <h5 class="card-title">{{ card.title }}</h5>
                                 <p class="card-text">{{ card.desc }}</p>
@@ -40,8 +40,8 @@
                 <div class="carousel-item">
                     <div class="card-group">
                         <div class="card" v-for="(card, index) in cards" :key="'slide3-' + index">
-                            <img :src="card.img" class="card-img-top" :alt="card.title" @click="verDetalhes(index)"
-                                style="cursor: pointer;" />
+                            <img :src="card.img" class="card-img-top" :alt="card.title" @click="verDetalhes(card.id)"/>
+    
                             <div class="card-body">
                                 <h5 class="card-title">{{ card.title }}</h5>
                                 <p class="card-text">{{ card.desc }}</p>
@@ -79,24 +79,28 @@ export default {
         return {
             cards: [
                 {
+                    id: 1,
                     img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_encanto_2mm_anel_solitario_109_1_80e2a18588a47e1153771a7cb2a33777.jpeg",
                     title: "Anel Brilhante",
                     desc: "Anel delicado em ouro 18k com pedras de zircônia.",
                     preco: "R$ 200,00"
                 },
                 {
+                    id: 2,
                     img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_dulce_2mm_anel_solitario_103_1_b27b4a8587b80ff651e130218bd63b7e.jpeg",
                     title: "Anel Brilhante",
                     desc: "Anel delicado em ouro 18k com pedras de zircônia.",
                     preco: "R$ 320,00"
                 },
                 {
+                    id: 3,
                     img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_casamento_italian_ouro_10k_1_5mm_anel_brinde_715_1_df6ce4eab3b68f75bd641d92fe52ab42.jpeg",
                     title: "Anel Brilhante",
                     desc: "Anel delicado em ouro 18k com pedras de zircônia.",
                     preco: "R$ 180,00"
                 },
                 {
+                    id: 4,
                     img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_encanto_2mm_anel_solitario_109_1_80e2a18588a47e1153771a7cb2a33777.jpeg",
                     title: "Anel Brilhante",
                     desc: "Anel delicado em ouro 18k com pedras de zircônia.",
@@ -104,13 +108,12 @@ export default {
                 }
             ]
         };
-    },      
+    },
     methods: {
-            verDetalhes(index) {
-                // o index + 1 é so para simular um ID
-                this.$router.push(`/produto/${index + 1}`);
-            }
+        verDetalhes(id) {
+            this.$router.push(`/produto/${id}`);
         }
+    }
 };
 </script>
 
