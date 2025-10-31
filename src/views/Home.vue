@@ -87,6 +87,10 @@
 
         </div>
 
+        <h2 class="titulo-categoria">Nossos Produtos</h2>
+        <p class="subtitulo-categoria">Luxo e design para quem é livre para brilhar</p>
+
+
         <!-- Cards -->
         <div id="pro">
             <Cards />

@@ -3,14 +3,13 @@
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
 
-                <h2 class="titulo-categoria">Nossos Produtos</h2>
-                <p class="subtitulo-categoria">Luxo e design para quem é livre para brilhar</p>
-                
                 <!-- SLIDE 1 -->
                 <div class="carousel-item active">
                     <div class="card-group">
                         <div class="card" v-for="(card, index) in cards" :key="'slide1-' + index">
-                            <img :src="card.img" class="card-img-top" :alt="card.title">
+                            <img :src="card.img" class="card-img-top" :alt="card.title" @click="verDetalhes(index)"
+                                style="cursor: pointer;" />
+
                             <div class="card-body">
                                 <h5 class="card-title">{{ card.title }}</h5>
                                 <p class="card-text">{{ card.desc }}</p>
@@ -25,7 +24,8 @@
                 <div class="carousel-item">
                     <div class="card-group">
                         <div class="card" v-for="(card, index) in cards" :key="'slide2-' + index">
-                            <img :src="card.img" class="card-img-top" :alt="card.title">
+                            <img :src="card.img" class="card-img-top" :alt="card.title" @click="verDetalhes(index)"
+                                style="cursor: pointer;" />
                             <div class="card-body">
                                 <h5 class="card-title">{{ card.title }}</h5>
                                 <p class="card-text">{{ card.desc }}</p>
@@ -40,7 +40,8 @@
                 <div class="carousel-item">
                     <div class="card-group">
                         <div class="card" v-for="(card, index) in cards" :key="'slide3-' + index">
-                            <img :src="card.img" class="card-img-top" :alt="card.title">
+                            <img :src="card.img" class="card-img-top" :alt="card.title" @click="verDetalhes(index)"
+                                style="cursor: pointer;" />
                             <div class="card-body">
                                 <h5 class="card-title">{{ card.title }}</h5>
                                 <p class="card-text">{{ card.desc }}</p>
@@ -55,11 +56,13 @@
 
             <div class="cont-btn">
                 <!-- Botões do carrossel -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Anterior</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Próximo</span>
                 </button>
@@ -101,7 +104,13 @@ export default {
                 }
             ]
         };
-    }
+    },      
+    methods: {
+            verDetalhes(index) {
+                // o index + 1 é so para simular um ID
+                this.$router.push(`/produto/${index + 1}`);
+            }
+        }
 };
 </script>
 
@@ -136,7 +145,7 @@ export default {
 }
 
 .card {
-    width: 15rem; 
+    width: 15rem;
     background: #fff;
     border: none;
     border-radius: 16px;
@@ -152,7 +161,8 @@ export default {
 }
 
 .card-img-top {
-    height: 180px; /* antes era 220px */
+    height: 180px;
+    /* antes era 220px */
     object-fit: cover;
     border-bottom: 1px solid #eee;
     transition: transform 0.4s ease;
@@ -168,7 +178,7 @@ export default {
 }
 
 .card-title {
-    font-size: 1rem; 
+    font-size: 1rem;
     font-weight: 600;
     color: #222;
     margin-bottom: 0.3rem;
@@ -184,7 +194,7 @@ export default {
 .card-preco {
     font-size: 1rem;
     font-weight: 700;
-    color: #b38b59; 
+    color: #b38b59;
     margin-bottom: 0.8rem;
 }
 
@@ -204,14 +214,14 @@ export default {
     transform: scale(1.05);
 }
 
-.cont-btn{
+.cont-btn {
     gap: 16rem;
 }
 
 .carousel-control-prev,
 .carousel-control-next {
     width: auto;
-    top: 50%;
+    top: 30%;
     transform: translateY(-50%);
     opacity: 0.9;
 }
@@ -219,7 +229,7 @@ export default {
 /* empurra os botões um pouco pra fora */
 .carousel-control-prev {
     margin-top: 80px;
-    left: 10px; 
+    left: 10px;
 }
 
 .carousel-control-next {
@@ -263,5 +273,4 @@ export default {
         font-size: 0.95rem;
     }
 }
-
 </style>
