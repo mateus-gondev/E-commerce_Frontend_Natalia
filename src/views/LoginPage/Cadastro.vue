@@ -10,17 +10,29 @@
                             <p class="text-muted">Junte-se a nós hoje</p>
                         </div>
 
-                        <form>
+                        <form @submit.prevent="submitRegister">
                             <div class="mb-3">
-                                <label for="name" class="form-label fw-semibold">Nome Completo</label>
-                                <input type="text" class="form-control" id="name" placeholder="Seu nome completo"
-                                    required />
+                            <label for="name" class="form-label fw-semibold">Nome Completo</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                v-model="name"
+                                placeholder="Seu nome completo"
+                                required
+                            />
                             </div>
 
                             <div class="mb-3">
-                                <label for="email" class="form-label fw-semibold">E-mail</label>
-                                <input type="email" class="form-control" id="email" placeholder="seu@email.com"
-                                    required />
+                            <label for="email" class="form-label fw-semibold">E-mail</label>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                v-model="email"
+                                placeholder="seu@email.com"
+                                required
+                            />
                             </div>
 
                             <div class="mb-3 position-relative">
@@ -35,7 +47,6 @@
                                     </span>
                                 </div>
                             </div>
-
 
                             <button type="submit" class="btn btn-gold w-100 btn-lg mb-3">
                                 <i class="bi bi-person-plus me-2"></i>
@@ -63,14 +74,42 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     name: "Cadastro",
     data() {
         return {
+            name: "",
+            email: "",
             password: "",
             mostrarSenha: false,
         };
     },
+    methods: {
+        async submitRegister() {
+            try {
+                const payload = {
+                name: this.name,
+                email: this.email,
+                password: this.password,
+                };
+                const response = await axios.post("http://127.0.0.1:5000/api/register", payload);
+
+                if (response.status === 201) {
+                alert("✅ Cadastro realizado com sucesso!");
+                this.$router.push("/login");
+                }
+            } catch (error) {
+                if (error.response && error.response.status === 409) {
+                alert("⚠️ Este e-mail já está cadastrado!");
+                } else {
+                alert("❌ Erro ao cadastrar. Tente novamente.");
+                }
+            }
+        }
+
+    }
 
 };
 </script>

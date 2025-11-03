@@ -30,7 +30,7 @@
                             </div>
 
 
-                            <button type="submit" class="btn btn-gold w-100 btn-lg mb-3">
+                            <button @click="submitLogin" type="submit" class="btn btn-gold w-100 btn-lg mb-3">
                                 <i class="bi bi-box-arrow-in-right me-2"></i>
                                 Entrar
                             </button>
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     name: "Login",
     data() {
@@ -70,6 +72,19 @@ export default {
             mostrarSenha: false,
         };
     },
+    methods: {
+        async submitLogin() {
+            try {
+            const res = await axios.post("http://127.0.0.1:5000/api/login", { email: this.email, password: this.password });
+            console.log(res.data);
+            // salvar user no localStorage ou state e redirecionar
+            localStorage.setItem("user", JSON.stringify(res.data.user));
+            this.$router.push("/");
+            } catch (err) {
+            alert(err.response?.data?.error || "Credenciais inválidas");
+            }
+        }
+    }
 };
 </script>
 
