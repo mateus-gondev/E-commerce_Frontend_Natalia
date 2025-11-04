@@ -1,33 +1,25 @@
 <template>
     <transition name="slide-login">
-        <div 
-            v-if="loginAberto" 
-            class="login-slider bg-white shadow position-fixed"
-            style="top: 0; right: 0; height: 100vh; width: 350px; z-index: 1100;"
-        >
+        <div v-if="loginAberto" class="login-slider bg-white shadow position-fixed"
+            style="top: 0; right: 0; height: 100vh; width: 350px; z-index: 1100;">
             <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
                 <h5 class="mb-0">
                     <i class="fas fa-gem me-2 text-warning"></i> Menu
                 </h5>
-                <button 
-                    class="btn-close-custom" 
-                    @click="fecharMenu" 
-                    title="Fechar"
-                >
+                <button class="btn-close-custom" @click="fecharMenu" title="Fechar">
                     &times;
                 </button>
             </div>
 
-            <div class="p-4 text-center text-muted d-flex flex-column justify-content-center" style="height: calc(100vh - 120px);">
-                <i class="fas fa-user-circle fa-4x mb-4 text-warning"></i>
+            <div class="p-4 text-center text-muted d-flex flex-column justify-content-center"
+                style="height: calc(100vh - 120px);">
+                <i class="fas fa-user-cijrcle fa-4x mb-4 text-warning"></i>
                 <p class="fw-semibold text-dark">Realize seu login</p>
 
-                <button 
-                    class="btn-login-entrar"
-                    @click="irParaLogin"
-                >
+                <button class="btn-login-entrar" @click="irParaLogin">
                     Entrar
                 </button>
+
 
             </div>
         </div>
@@ -52,15 +44,14 @@ export default {
         irParaLogin() {
             this.fecharMenu();
             setTimeout(() => {
-            this.$router.push('/login');
-            }, 350); // espera o slide fechar antes de mudar a rota
-        }
+                this.$router.push('/login');
+            }, 400); // espera o slide fechar
+        },
     },
 };
 </script>
 
 <style scoped>
-
 .slide-login-enter-active,
 .slide-login-leave-active {
     transition: transform 0.4s ease;

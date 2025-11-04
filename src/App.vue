@@ -1,35 +1,27 @@
 <template>
-  
-<Home />
-
+  <div id="app" class="app">
+    <!-- Aqui o Vue Router renderiza a página atual -->
+    <router-view />
+  </div>
 </template>
 
 <script>
-
-import Home from '@/views/Home.vue'
-
 export default {
-  name: 'App',
-  components: {
-    Home
-  }
-};
+  name: 'App'
+}
 </script>
 
 <style scoped>
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-  .app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-
-
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 </style>

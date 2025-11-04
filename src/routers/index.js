@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
-import Registro from '../views/Registro.vue';
+import Cadastro from '../views/Cadastro.vue';
+import RedSenha from '../views/RedSenha.vue';
+
 
 const routes = [
     {
@@ -11,13 +13,18 @@ const routes = [
     },
     {
         path: '/login',
-        name: 'login',
+        name: 'Login',
         component: Login,
     },
     {
-        path: '/register',
-        name: 'register',
-        component: Registro,
+        path: '/cadastro',
+        name: 'Cadastro',
+        component: Cadastro,
+    },
+        {
+        path: '/RedSenha',
+        name: 'RedSenha',
+        component: RedSenha,
     }
 ];
 

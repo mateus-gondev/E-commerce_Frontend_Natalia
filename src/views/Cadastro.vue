@@ -1,26 +1,45 @@
 <template>
-    <div class="login-page">
+    <div class="register-page">
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-7">
-                    <div class="login-card bg-white rounded shadow p-4 p-md-5">
+                    <div class="register-card bg-white rounded shadow p-4 p-md-5">
                         <div class="text-center mb-4">
                             <i class="bi bi-gem fs-1 text-gold"></i>
-                            <h2 class="fw-bold mt-3 text-dark">Bem-vindo de volta</h2>
-                            <p class="text-muted">Entre com sua conta</p>
+                            <h2 class="fw-bold mt-3 text-dark">Criar Conta</h2>
+                            <p class="text-muted">Junte-se a nós hoje</p>
                         </div>
 
-                        <form>
+                        <form @submit.prevent="submitRegister">
                             <div class="mb-3">
-                                <label for="email" class="form-label fw-semibold">E-mail</label>
-                                <input type="email" class="form-control" id="email" placeholder="name@example.com" />
+                            <label for="name" class="form-label fw-semibold">Nome Completo</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                v-model="name"
+                                placeholder="Seu nome completo"
+                                required
+                            />
+                            </div>
+
+                            <div class="mb-3">
+                            <label for="email" class="form-label fw-semibold">E-mail</label>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                v-model="email"
+                                placeholder="seu@email.com"
+                                required
+                            />
                             </div>
 
                             <div class="mb-3 position-relative">
                                 <label for="password" class="form-label fw-semibold">Senha</label>
                                 <div class="input-group">
                                     <input :type="mostrarSenha ? 'text' : 'password'" class="form-control" id="password"
-                                        placeholder="********" v-model="password" />
+                                        placeholder="Mínimo 6 caracteres" v-model="password" required />
                                     <span class="input-group-text bg-light toggle-password"
                                         @click="mostrarSenha = !mostrarSenha">
                                         <i
@@ -29,25 +48,18 @@
                                 </div>
                             </div>
 
-
-                            <button @click="submitLogin" type="submit" class="btn btn-gold w-100 btn-lg mb-3">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>
-                                Entrar
+                            <button type="submit" class="btn btn-gold w-100 btn-lg mb-3">
+                                <i class="bi bi-person-plus me-2"></i>
+                                Criar Conta
                             </button>
-
-                            <div class="text-center">
-                                <router-link to="/redefinir" class="text-decoration-none text-gold">
-                                    Esqueceu sua senha?
-                                </router-link>
-                            </div>
                         </form>
 
                         <hr class="my-4" />
 
                         <div class="text-center">
-                            <p class="text-muted mb-2">Não tem uma conta?</p>
-                            <router-link to="/cadastro" class="btn btn-outline-gold w-100 mb-3">
-                                Criar Conta
+                            <p class="text-muted mb-2">Já tem uma conta?</p>
+                            <router-link to="/login" class="btn btn-outline-gold w-100 mb-3">
+                                Fazer Login
                             </router-link>
 
                             <router-link to="/" class="btn btn-light w-100 border">
@@ -62,12 +74,15 @@
 </template>
 
 <script>
+
 export default {
-    name: "Login",
+    name: "Cadastro",
     data() {
         return {
+            name: "",
             email: "",
             password: "",
+            confirmPassword: "",
         };
     },
 };
@@ -75,7 +90,7 @@ export default {
 
 
 <style scoped>
-.login-page {
+.register-page {
     padding-top: 72px;
     min-height: 100vh;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -83,7 +98,7 @@ export default {
     align-items: center;
 }
 
-.login-card {
+.register-card {
     animation: fadeInUp 0.5s ease;
 }
 
