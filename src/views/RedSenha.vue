@@ -4,7 +4,7 @@
       <!-- Logo e título -->
       <div class="mb-6">
         <div class="flex flex-col items-center">
-          <div class="text-3xl font-semibold text-gray-800 tracking-wide">BLUASSIST</div>
+          <div class="text-3xl font-semibold text-gray-800 tracking-wide">BRILHANCÊ</div>
           <div class="h-1 w-10 bg-[#287BFF] rounded-full mt-2"></div>
         </div>
       </div>
@@ -14,7 +14,7 @@
 
       <!-- Texto explicativo -->
       <p class="text-gray-600 text-sm mb-8 text-left">
-        <span class="font-semibold text-gray-800">Hey Jack,</span><br><br>
+        <span class="font-semibold text-gray-800">Olá,</span><br><br>
         Precisa redefinir sua senha? Sem problemas! Basta clicar no botão abaixo e pronto.
 Se você não fez esta solicitação, ignore este e-mail..
       </p>

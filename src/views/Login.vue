@@ -36,7 +36,7 @@
                             </button>
 
                             <div class="text-center">
-                                <router-link to="/redefinir" class="text-decoration-none text-gold">
+                                <router-link to="/RedSenha" class="text-decoration-none text-gold">
                                     Esqueceu sua senha?
                                 </router-link>
                             </div>
