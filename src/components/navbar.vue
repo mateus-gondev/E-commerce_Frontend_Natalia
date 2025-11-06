@@ -1,7 +1,6 @@
 <template>
     <header :class="{ 'scrolled': isScrolled }">
         <nav class="navbar">
-
             <div class="navbar-top" v-show="!isScrolled">
                 <img src="@/assets/imgs/logo_natalia.jpeg" alt="Logo" class="logo" />
             </div>
@@ -20,46 +19,44 @@
                 </ul>
 
                 <div class="navbar-right">
-                    <div class="ms-auto d-flex align-items-center">
-                        <button class="btn-carrinho" @click="abrirCarrinho" title="Ver carrinho">
-                            <img src="@/assets/icons/iconCarrinho.png" alt="Carrinho" />
-                        </button>
-                    </div>
+                    <button class="btn-carrinho" @click="abrirCarrinho" title="Ver carrinho">
+                        <img src="@/assets/icons/iconCarrinho.png" alt="Carrinho" />
+                    </button>
 
                     <CarrinhoLateral ref="carrinhoRef" />
 
                     <p class="divisao"> | </p>
 
-                    <div class="cont-bentrar">
+                    <!-- Se o usuário NÃO estiver logado -->
+                    <div v-if="!user" class="cont-bentrar">
                         <button class="btn-Entrar" @click="abrirMenu" title="Entrar">
-                            <img src="@/assets/icons/iconEntrar.png" alt="Ent" />
+                            <img src="@/assets/icons/iconEntrar.png" alt="Entrar" />
                         </button>
                     </div>
 
-                    <ModalLogin ref="modalRef"/>
+                    <!-- Se o usuário estiver logado -->
+                    <div v-else class="dropdown perfil">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="@/assets/imgs/perfil.png" alt="Perfil" width="35" height="35"
+                                class="rounded-circle me-2">
+                            <strong>{{ user.name }}</strong>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow">
+                            <li><a class="dropdown-item" href="#">Meu Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Minhas Compras</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#" @click="logout">Sair</a></li>
+                        </ul>
+                    </div>
 
+                    <ModalLogin ref="modalRef" />
                 </div>
             </div>
         </nav>
     </header>
-
-    <!--Modal Perfil - TODO -->
-    <!--
-                <div class="dropdown"> 
-                    <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2"> <strong>Perfil</strong> 
-                    </a>
-                    <ul class="dropdown-menu text-small shadow">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
-                    </ul>
-                </div>-->
-
 </template>
 
 <script>
@@ -68,24 +65,28 @@ import ModalLogin from "../components/Login/ModalLogin.vue";
 
 export default {
     name: "navbar",
-    components: { 
+    components: {
         CarrinhoLateral,
-        ModalLogin
+        ModalLogin,
     },
     data() {
         return {
             isScrolled: false,
+            user: null,
         };
     },
     mounted() {
         window.addEventListener("scroll", this.handleScroll);
+        window.addEventListener("user-login", this.loadUser);
+        this.loadUser(); // verificar se já está logado
     },
     beforeUnmount() {
         window.removeEventListener("scroll", this.handleScroll);
+        window.removeEventListener("user-login", this.loadUser);
     },
     methods: {
         handleScroll() {
-            this.isScrolled = window.scrollY > 80; // ao rolar mais de 80px, ativa o modo compacto
+            this.isScrolled = window.scrollY > 80;
         },
         abrirCarrinho() {
             this.$refs.carrinhoRef.abrirCarrinho();
@@ -93,9 +94,19 @@ export default {
         abrirMenu() {
             this.$refs.modalRef.abrirMenu();
         },
+        loadUser() {
+            const storedUser = localStorage.getItem("user");
+            this.user = storedUser ? JSON.parse(storedUser) : null;
+        },
+        logout() {
+            localStorage.removeItem("user");
+            this.user = null;
+            alert("👋 Você saiu da conta!");
+        },
     },
 };
 </script>
+
 
 
 <style scoped>
@@ -233,7 +244,7 @@ header {
     transform: scale(1.1);
 }
 
-.divisao{
+.divisao {
     margin-top: 15px;
 }
 

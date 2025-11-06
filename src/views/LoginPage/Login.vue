@@ -13,7 +13,7 @@
                         <form>
                             <div class="mb-3">
                                 <label for="email" class="form-label fw-semibold">E-mail</label>
-                                <input type="email" class="form-control" id="email" placeholder="name@example.com" />
+                                <input v-model="email" type="email" class="form-control" id="email" placeholder="name@example.com" />
                             </div>
 
                             <div class="mb-3 position-relative">
@@ -68,23 +68,33 @@ export default {
     name: "Login",
     data() {
         return {
+            email: "",
             password: "",
             mostrarSenha: false,
         };
     },
     methods: {
-        async submitLogin() {
-            try {
-            const res = await axios.post("http://127.0.0.1:5000/api/login", { email: this.email, password: this.password });
-            console.log(res.data);
-            // salvar user no localStorage ou state e redirecionar
-            localStorage.setItem("user", JSON.stringify(res.data.user));
+    async submitLogin(e) {
+        e.preventDefault(); // Isso aqui evita a pagina carregar
+        try {
+            const res = await axios.post("http://127.0.0.1:5000/api/login", {
+            email: this.email,
+            password: this.password,
+            });
+
+            const user = res.data.user;
+            localStorage.setItem("user", JSON.stringify(user));
+
+            // Aqui eu vou ta emitindo um evento global para navbar atualizar
+            window.dispatchEvent(new Event("user-login"));
+
+            alert("✅ Login realizado com sucesso!");
             this.$router.push("/");
             } catch (err) {
-            alert(err.response?.data?.error || "Credenciais inválidas");
+                alert(err.response?.data?.error || "❌ Credenciais inválidas");
             }
-        }
-    }
+        },
+    },
 };
 </script>
 
