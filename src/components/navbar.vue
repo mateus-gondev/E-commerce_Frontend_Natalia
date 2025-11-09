@@ -62,6 +62,7 @@
 <script>
 import CarrinhoLateral from "../components/CarrinhoLateral.vue";
 import ModalLogin from "../components/Login/ModalLogin.vue";
+import storage from "@/services/storage";
 
 export default {
     name: "navbar",
@@ -83,6 +84,7 @@ export default {
     beforeUnmount() {
         window.removeEventListener("scroll", this.handleScroll);
         window.removeEventListener("user-login", this.loadUser);
+        window.removeEventListener("user-logout", this.loadUser);
     },
     methods: {
         handleScroll() {
@@ -95,13 +97,12 @@ export default {
             this.$refs.modalRef.abrirMenu();
         },
         loadUser() {
-            const storedUser = localStorage.getItem("user");
-            this.user = storedUser ? JSON.parse(storedUser) : null;
+            this.user = storage.getUser();
         },
         logout() {
-            localStorage.removeItem("user");
-            this.user = null;
+            storage.clearUser();
             alert("👋 Você saiu da conta!");
+            this.$router.push("/login");
         },
     },
 };

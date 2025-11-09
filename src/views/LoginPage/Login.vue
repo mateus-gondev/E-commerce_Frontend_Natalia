@@ -62,7 +62,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import api from "@/services/api";
+import storage from "@/services/storage";
 
 export default {
     name: "Login",
@@ -74,25 +75,22 @@ export default {
         };
     },
     methods: {
-    async submitLogin(e) {
-        e.preventDefault(); // Isso aqui evita a pagina carregar
+        async submitLogin(e) {
+        e.preventDefault(); //Evita pg carregar
         try {
-            const res = await axios.post("http://127.0.0.1:5000/api/login", {
+            const res = await api.post("/login", {
             email: this.email,
             password: this.password,
             });
 
             const user = res.data.user;
-            localStorage.setItem("user", JSON.stringify(user));
-
-            // Aqui eu vou ta emitindo um evento global para navbar atualizar
-            window.dispatchEvent(new Event("user-login"));
+            storage.saveUser(user); // usa o serviço aqui!!
 
             alert("✅ Login realizado com sucesso!");
             this.$router.push("/");
-            } catch (err) {
-                alert(err.response?.data?.error || "❌ Credenciais inválidas");
-            }
+        } catch (err) {
+            alert(err.response?.data?.error || "❌ Credenciais inválidas");
+        }
         },
     },
 };

@@ -1,4 +1,5 @@
 <template>
+    <!--VALORES FICTICIOS-->
     <div class="container-pedidos">
         <h3 class="titulo">Lista de Pedidos</h3>
 

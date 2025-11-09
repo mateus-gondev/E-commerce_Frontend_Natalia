@@ -1,48 +1,42 @@
 <template>
-
-    <!--NAVBAR-->
+    <!-- NAVBAR -->
     <div class="header">
         <navbar />
     </div>
 
     <main class="container-detalhes">
-        <!--DETALHE DO PRODUTO-->
+        <!-- DETALHE DO PRODUTO -->
         <div class="container py-5">
 
-            <router-link to="/" class="btn btn-outline-primary mb-4">
-                <i class="bi bi-arrow-left me-2"></i> Voltar à loja
-            </router-link>
+        <router-link to="/" class="btn btn-outline-primary mb-4">
+            <i class="bi bi-arrow-left me-2"></i> Voltar à loja
+        </router-link>
 
-            <div v-if="produto" class="row align-items-center">
-                <div class="col-md-6">
-                    <img :src="produto.img" class="img-fluid rounded shadow" :alt="produto.title" />
-                </div>
-                <div class="col-md-6">
-                    <h2 class="mb-3">{{ produto.title }}</h2>
-                    <p class="mb-4">{{ produto.desc }}</p>
-                    <h4 class="text-primary mb-4">{{ produto.preco }}</h4>
-                    <button class="btn btn-primary mt-3">Adicionar ao Carrinho</button>
-                    <button class="btn btn-primary mt-3">Comprar</button>
-                </div>
+        <div v-if="produto" class="row align-items-center fade-in">
+            <div class="col-md-6">
+            <img :src="produto.img" class="img-fluid rounded shadow" :alt="produto.title" />
+            </div>
+            <div class="col-md-6">
+            <h2 class="mb-3">{{ produto.title }}</h2>
+            <p class="mb-4">{{ produto.desc }}</p>
+            <h4 class="text-primary mb-4">{{ produto.preco }}</h4>
+            <button class="btn btn-primary mt-3 me-2">Adicionar ao Carrinho</button>
+            <button class="btn btn-dark mt-3">Comprar</button>
             </div>
         </div>
+        </div>
+
+        <div class="mt-5">
+            <Cards />
+        </div>
+
+        <div class="mt-5">
+            <Footer />
+        </div>
     </main>
-
-
-    <!-- Cards -->
-    <div id="pro">
-        <Cards />
-    </div>
-
-    <!--FOOTER-->
-    <div id="con">
-        <Footer />
-    </div>
-
 </template>
 
 <script>
-
 import navbar from '@/components/navbar.vue'
 import Cards from '@/components/Cards.vue'
 import Footer from '@/components/Footer.vue'
@@ -56,67 +50,76 @@ export default {
     },
     data() {
         return {
-            produto: null
+        produto: null
         };
     },
     methods: {
         carregarProduto(id) {
-            const produtos = [
-                {
-                    id: 1,
-                    img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_encanto_2mm_anel_solitario_109_1_80e2a18588a47e1153771a7cb2a33777.jpeg",
-                    title: "Anel Brilhante",
-                    desc: "Anel delicado em ouro 18k com pedras de zircônia.",
-                    preco: "R$ 200,00"
-                },
-                {
-                    id: 2,
-                    img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_dulce_2mm_anel_solitario_103_1_b27b4a8587b80ff651e130218bd63b7e.jpeg",
-                    title: "Anel de Ouro",
-                    desc: "Peça elegante, perfeita para momentos especiais.",
-                    preco: "R$ 320,00"
-                },
-                {
-                    id: 3,
-                    img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_casamento_italian_ouro_10k_1_5mm_anel_brinde_715_1_df6ce4eab3b68f75bd641d92fe52ab42.jpeg",
-                    title: "Anel de Casamento",
-                    desc: "Par de alianças em ouro 10k, design clássico e sofisticado.",
-                    preco: "R$ 180,00"
-                },
-                {
-                    id: 4,
-                    img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_encanto_2mm_anel_solitario_109_1_80e2a18588a47e1153771a7cb2a33777.jpeg",
-                    title: "Anel Encanto",
-                    desc: "Modelo exclusivo com acabamento em ouro e detalhes únicos.",
-                    preco: "R$ 200,00"
-                }
-            ];
+        const produtos = [
+            {
+            id: 1,
+            img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_encanto_2mm_anel_solitario_109_1_80e2a18588a47e1153771a7cb2a33777.jpeg",
+            title: "Anel Brilhante",
+            desc: "Anel delicado em ouro 18k com pedras de zircônia.",
+            preco: "R$ 200,00"
+            },
+            {
+            id: 2,
+            img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_dulce_2mm_anel_solitario_103_1_b27b4a8587b80ff651e130218bd63b7e.jpeg",
+            title: "Anel de Ouro",
+            desc: "Peça elegante, perfeita para momentos especiais.",
+            preco: "R$ 320,00"
+            },
+            {
+            id: 3,
+            img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_casamento_italian_ouro_10k_1_5mm_anel_brinde_715_1_df6ce4eab3b68f75bd641d92fe52ab42.jpeg",
+            title: "Anel de Casamento",
+            desc: "Par de alianças em ouro 10k, design clássico e sofisticado.",
+            preco: "R$ 180,00"
+            },
+            {
+            id: 4,
+            img: "https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_encanto_2mm_anel_solitario_109_1_80e2a18588a47e1153771a7cb2a33777.jpeg",
+            title: "Anel Encanto",
+            desc: "Modelo exclusivo com acabamento em ouro e detalhes únicos.",
+            preco: "R$ 200,00"
+            }
+        ];
 
-            this.produto = produtos.find(p => Number(p.id) === Number(id)) || null;
+        this.produto = produtos.find(p => Number(p.id) === Number(id)) || null;
         }
     },
     created() {
         const id = this.$route.params.id;
         this.carregarProduto(id);
+        window.scrollTo({ top: 0, behavior: "smooth" }); // Rola suavemente pro topo
     },
     watch: {
         '$route.params.id'(novoId) {
-        this.carregarProduto(novoId);
+            this.carregarProduto(novoId);
+            window.scrollTo({ top: 0, behavior: "smooth" }); 
         }
     }
-
 };
 </script>
 
 <style scoped>
+
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 img {
     max-height: 400px;
     object-fit: cover;
 }
 
 .container-detalhes {
-    margin-top: 300px;
-
+    margin-top: 290px;
 }
 
 /* Botão voltar */

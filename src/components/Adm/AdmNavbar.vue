@@ -1,45 +1,46 @@
 <template>
     <header>
-        <nav class="AdmNavbar">
-            <div class="sidebar">
-                <div href="/" class="logo">
-                    <img class="icon-logo" src="@/assets/icons/iconLogo.png" alt="logo" />
-                    <span class="fs-4">Acesso Adm</span>
-                </div>
-                <hr>
-                <ul class="menu">
-                    <li>
-                        <a href="#" class="active">
-                            <img src="@/assets/icons/iconPedido.png" alt="Pedido" />
-                            Pedido
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="@/assets/icons/iconProdutos.png" alt="Produtos" />
-                            Produtos
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="@/assets/icons/iconUser.png" alt="Usuários" />
-                            Usuários
-                        </a>
-                    </li>
-                    <li>
-                        <a class="cont-sair" href="#" >
-                            <img src="@/assets/icons/iconSair.png" alt="Sair" />
-                            Sair
-                        </a>
-                    </li>
-                </ul>
-                <hr>
+        <nav class="adm-navbar">
+        <div class="sidebar">
+        
+            <div class="logo">
+            <img class="icon-logo" src="@/assets/icons/iconLogo.png" alt="logo" />
+            <span class="titulo">Gestão <span class="titulo-destaque">Site</span></span>
             </div>
+
+            <hr />
+
+            <ul class="menu">
+                <li>
+                    <router-link to="/adm">
+                    <img src="@/assets/icons/iconPedido.png" alt="Pedido" />
+                    Pedido
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="#">
+                    <img src="@/assets/icons/iconProdutos.png" alt="Produtos" />
+                    Produtos
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/adm/usuario">
+                    <img src="@/assets/icons/iconUser.png" alt="Usuários" />
+                    Usuários
+                    </router-link>
+                </li>
+            </ul>
+
+            <div class="logout">
+            <router-link to="/">
+                <img src="@/assets/icons/iconSair.png" alt="Sair" />
+                Sair
+            </router-link>
+            </div>
+        </div>
         </nav>
     </header>
 </template>
-
-
 
 <script>
 export default {
@@ -47,27 +48,21 @@ export default {
 }
 
 </script>
+
 <style scoped>
 :root {
-    --preto: #141414;
-    --azul: #4e31d0;
+    --fundo: #1e1e1e;
     --branco: #ffffff;
-    --banco-cinza: #c5c5c5;
+    --cinza: #bdbdbd;
+    --dourado: #d4af37;
+    --dourado-escuro: #b18f2d;
 }
 
-.icon-logo{
-    width: 40px;
-    height: 40px;
-    margin-bottom: 10px;
-    margin-left: -5px;
-}
-
-.AdmNavbar {
-    background-color: var(--preto);
+.adm-navbar {
+    background-color: var(--fundo);
     width: 250px;
     height: 100vh;
-    padding: 1.5rem;
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+    padding: 2rem 1rem;
     color: var(--branco);
     display: flex;
     flex-direction: column;
@@ -75,11 +70,29 @@ export default {
     position: fixed;
     left: 0;
     top: 0;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
 }
 
-.sidebar .fs-4 {
-    font-weight: 700;
-    margin-left: 10px;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-logo {
+    width: 38px;
+    height: 38px;
+}
+
+.titulo {
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+    color: var(--branco);
+}
+
+.titulo-destaque {
+    color: var(--dourado);
 }
 
 .sidebar hr {
@@ -88,53 +101,116 @@ export default {
     margin: 1.5rem 0;
 }
 
-.sidebar .menu {
+.menu {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.sidebar .menu li {
-    margin-bottom: 1rem;
+.menu li {
+    margin-bottom: 0.6rem;
 }
 
-.sidebar .menu li:hover{
-    color: rgb(214, 171, 41);
-}
-
-.sidebar .menu a {
-    color: var(--banco-cinza);
+.menu a {
     display: flex;
     align-items: center;
-    font-weight: 500;
-    border-radius: 12px;
-    padding: 0.75rem 1rem;
+    gap: 12px;
     text-decoration: none;
+    color: var(--cinza);
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
     transition: all 0.3s ease;
 }
 
-.sidebar .menu a img {
+.menu a img {
     width: 22px;
-    margin-right: 10px;
-    opacity: 0.8;
-    transition: 0.3s ease;
+    opacity: 0.85;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.sidebar .menu a:hover,
-.sidebar .menu a.active {
-    background-color: var(--azul);
-    color: var(--branco);
+.menu a:hover,
+.menu a.router-link-exact-active {
+    background-color: rgba(212, 175, 55, 0.1);
+    color: var(--dourado);
 }
 
-.sidebar .menu a:hover img,
-.sidebar .menu a.active img {
-    opacity: 1;
+.menu a:hover img,
+.menu a.router-link-exact-active img {
     transform: scale(1.1);
+    opacity: 1;
 }
 
-.menu .cont-sair{
-    margin-top: 250px;
-    margin-left: 45px;
+.menu a:hover {
+    background-color: rgba(212, 175, 55, 0.06);
+    color: var(--dourado);
 }
 
+.menu a.router-link-active,
+.menu a.router-link-exact-active,
+.menu a.is-active {  
+    background-color: transparent;
+    color: var(--dourado);
+    position: relative;
+    font-weight: 700;
+}
+
+.menu a.router-link-active::before,
+.menu a.router-link-exact-active::before,
+.menu a.is-active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+    background: var(--dourado);
+}
+
+.menu a.router-link-active img,
+.menu a.router-link-exact-active img,
+.menu a.is-active img {
+    opacity: 1;
+    filter: none;
+    transform: scale(1.03);
+}
+
+.menu a,
+.menu a img {
+    transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease, opacity 0.18s ease;
+}
+
+.logout {
+    margin-top: 280px;
+    display: flex;
+    justify-content: center;
+}
+
+.logout a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--dourado);
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.logout a img {
+    width: 22px;
+    transition: transform 0.3s ease;
+}
+
+.logout a:hover {
+    background-color: rgba(212, 175, 55, 0.15);
+    color: var(--dourado-escuro);
+}
+
+.logout a:hover img {
+    transform: translateX(-3px);
+}
 </style>
+

@@ -39,7 +39,7 @@
                                 <label for="password" class="form-label fw-semibold">Senha</label>
                                 <div class="input-group">
                                     <input :type="mostrarSenha ? 'text' : 'password'" class="form-control" id="password"
-                                        placeholder="Mínimo 6 caracteres" v-model="password" required />
+                                        placeholder="Sua senha" v-model="password" required />
                                     <span class="input-group-text bg-light toggle-password"
                                         @click="mostrarSenha = !mostrarSenha">
                                         <i
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import api from "@/services/api";
 
 export default {
     name: "Cadastro",
@@ -94,7 +94,7 @@ export default {
                 email: this.email,
                 password: this.password,
                 };
-                const response = await axios.post("http://127.0.0.1:5000/api/register", payload);
+                const response = await api.post("/register", payload);
 
                 if (response.status === 201) {
                 alert("✅ Cadastro realizado com sucesso!");

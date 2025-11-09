@@ -5,6 +5,7 @@ import Login from '../views/LoginPage/Login.vue';
 import Cadastro from '../views/LoginPage/Cadastro.vue';
 import Redefinir from '../views/LoginPage/Redefinir.vue';
 import AdmHome from '../views/AdmPage/AdmHome.vue';
+import AdmUsuario from '../views/AdmPage/AdmUsuario.vue';
 
 const routes = [
     {
@@ -36,13 +37,22 @@ const routes = [
         name: 'Redefinir',
         component: Redefinir,
     },
-    //Rotas ADM
-    {
-    path: '/adm',
-    name: 'AdmHome',
-    component: AdmHome,
-    }
-
+    //Rotas ADM ----------------------------------
+        {
+        path: '/adm',
+        name: 'AdmHome',
+        component: AdmHome,
+        },
+        {
+        path: '/adm/usuario',
+        name: 'AdmUsuario',
+        component: AdmUsuario,
+        },
+        {
+        path: '/adm/usuario/novo',
+        name: 'AdmForm',
+        component: () => import('@/views/AdmPage/AdmForm.vue')
+        }
 
 ];
 
