@@ -257,23 +257,4 @@ export default {
 }
 
 
-
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 768px) {
-    .card {
-        width: 12rem;
-    }
-
-    .card-img-top {
-        height: 150px;
-    }
-
-    .card-title {
-        font-size: 0.9rem;
-    }
-
-    .card-preco {
-        font-size: 0.95rem;
-    }
-}
 </style>

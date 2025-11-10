@@ -1,4 +1,4 @@
-# 🛒 E-commerce Natalia - Frontend
+# 🛒 E-commerce Natalia - Frontend + Backend
 
 <p align="start">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js" width="40" height="40"/>

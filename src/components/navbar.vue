@@ -1,60 +1,97 @@
 <template>
     <header :class="{ 'scrolled': isScrolled }">
         <nav class="navbar">
-            <div class="navbar-top" v-show="!isScrolled">
-                <img src="@/assets/imgs/logo_natalia.jpeg" alt="Logo" class="logo" />
+        <!-- Logo -->
+        <div class="navbar-top" v-show="!isScrolled">
+            <img src="@/assets/imgs/logo_natalia.jpeg" alt="Logo" class="logo" />
+        </div>
+
+        <div class="navbar-bottom">
+            <!-- Ícone de menu hamburguer -->
+            <img
+                src="@/assets/icons/iconMenu.png"
+                alt="Menu"
+                class="icon-menu"
+                @click="toggleMenu"
+            />
+
+            <!-- Campo de busca -->
+            <div class="buscar">
+                <img src="@/assets/icons/iconLupa.png" alt="Buscar" />
+                <input type="text" placeholder="Encontre sua joia..." />
             </div>
 
-            <div class="navbar-bottom">
-                <div class="buscar">
-                    <img src="@/assets/icons/iconLupa.png" alt="Buscar" />
-                    <input type="text" placeholder="Encontre sua joia..." />
-                </div>
+            <!-- Menu normal apenas desktop -->
+            <ul class="menu-desktop">
+                <li class="link"><a href="#">Home</a></li>
+                <li class="link"><a href="#cate">Categorias</a></li>
+                <li class="link"><a href="#pro">Produtos</a></li>
+                <li class="link"><a href="#con">Contato</a></li>
+            </ul>
 
-                <ul class="menu">
-                    <li class="link"><a href="#">Home</a></li>
-                    <li class="link"><a href="#cate">Categorias</a></li>
-                    <li class="link"><a href="#pro">Produtos</a></li>
-                    <li class="link"><a href="#con">Contato</a></li>
-                </ul>
+            <!-- Lado direito -->
+            <div class="navbar-right">
+                <button class="btn-carrinho" @click="abrirCarrinho" title="Ver carrinho">
+                    <img src="@/assets/icons/iconCarrinho.png" alt="Carrinho" />
+                </button>
 
-                <div class="navbar-right">
-                    <button class="btn-carrinho" @click="abrirCarrinho" title="Ver carrinho">
-                        <img src="@/assets/icons/iconCarrinho.png" alt="Carrinho" />
+                <CarrinhoLateral ref="carrinhoRef" />
+                <p class="divisao"> | </p>
+
+                <div v-if="!user" class="cont-bentrar">
+                    <button class="btn-Entrar" @click="abrirMenu" title="Entrar">
+                        <img src="@/assets/icons/iconEntrar.png" alt="Entrar" />
                     </button>
+                </div>
 
-                    <CarrinhoLateral ref="carrinhoRef" />
+                <div v-else class="dropdown perfil">
+                <a
+                    href="#"
+                    class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                >
+                    <img
+                    src="@/assets/imgs/perfil.png"
+                    alt="Perfil"
+                    width="35"
+                    height="35"
+                    class="rounded-circle me-2"
+                    />
+                    <strong>{{ user.name }}</strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow">
+                    <li><a class="dropdown-item" href="#">Meu Perfil</a></li>
+                    <li><a class="dropdown-item" href="#">Minhas Compras</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" href="#" @click="logout">Sair</a></li>
+                </ul>
+                </div>
 
-                    <p class="divisao"> | </p>
+                <ModalLogin ref="modalRef" />
+            </div>
 
-                    <!-- Se o usuário NÃO estiver logado -->
-                    <div v-if="!user" class="cont-bentrar">
-                        <button class="btn-Entrar" @click="abrirMenu" title="Entrar">
-                            <img src="@/assets/icons/iconEntrar.png" alt="Entrar" />
-                        </button>
-                    </div>
-
-                    <!-- Se o usuário estiver logado -->
-                    <div v-else class="dropdown perfil">
-                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="@/assets/imgs/perfil.png" alt="Perfil" width="35" height="35"
-                                class="rounded-circle me-2">
-                            <strong>{{ user.name }}</strong>
-                        </a>
-                        <ul class="dropdown-menu text-small shadow">
-                            <li><a class="dropdown-item" href="#">Meu Perfil</a></li>
-                            <li><a class="dropdown-item" href="#">Minhas Compras</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#" @click="logout">Sair</a></li>
-                        </ul>
-                    </div>
-
-                    <ModalLogin ref="modalRef" />
+            <!-- Menu Celular  -->
+            <div class="menu-mobile" v-if="menuAberto">
+                <div class="menu-overlay" @click="toggleMenu"></div>
+                <div class="menu-content">
+                <button class="close-btn" @click="toggleMenu">×</button>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#cate">Categorias</a></li>
+                    <li><a href="#pro">Produtos</a></li>
+                    <li><a href="#con">Contato</a></li>
+                </ul>
+                <div class="menu-login-mobile" v-if="!user">
+                    <button class="btn-Entrar" @click="abrirMenu">
+                    <img src="@/assets/icons/iconEntrar.png" alt="Entrar" />
+                    Entrar
+                    </button>
+                </div>
                 </div>
             </div>
+            </div>
+
         </nav>
     </header>
 </template>
@@ -63,28 +100,26 @@
 import CarrinhoLateral from "../components/CarrinhoLateral.vue";
 import ModalLogin from "../components/Login/ModalLogin.vue";
 import storage from "@/services/storage";
+import "@/assets/css/responsivo/navbar_responsivo.css";
 
 export default {
     name: "navbar",
-    components: {
-        CarrinhoLateral,
-        ModalLogin,
-    },
+    components: { CarrinhoLateral, ModalLogin },
     data() {
         return {
-            isScrolled: false,
-            user: null,
+        isScrolled: false,
+        user: null,
+        menuAberto: false,
         };
     },
     mounted() {
         window.addEventListener("scroll", this.handleScroll);
         window.addEventListener("user-login", this.loadUser);
-        this.loadUser(); // verificar se já está logado
+        this.loadUser();
     },
     beforeUnmount() {
         window.removeEventListener("scroll", this.handleScroll);
         window.removeEventListener("user-login", this.loadUser);
-        window.removeEventListener("user-logout", this.loadUser);
     },
     methods: {
         handleScroll() {
@@ -94,7 +129,9 @@ export default {
             this.$refs.carrinhoRef.abrirCarrinho();
         },
         abrirMenu() {
-            this.$refs.modalRef.abrirMenu();
+            setTimeout(() => {
+                this.$router.push('/login');
+            }, 400);
         },
         loadUser() {
             this.user = storage.getUser();
@@ -104,10 +141,12 @@ export default {
             alert("👋 Você saiu da conta!");
             this.$router.push("/login");
         },
-    },
+        toggleMenu() {
+            this.menuAberto = !this.menuAberto;
+        },
+},
 };
 </script>
-
 
 
 <style scoped>
@@ -194,38 +233,6 @@ header {
     font-size: 14px;
 }
 
-/* ===== MENU CENTRAL ===== */
-.menu {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    margin-right: 180px;
-}
-
-.menu .link li {
-    display: flex;
-    align-items: center;
-}
-
-.menu li:not(:last-child)::after {
-    content: "|";
-    margin-left: 25px;
-    color: var(--banco-cinza);
-    font-weight: 300;
-}
-
-.menu .link a {
-    text-decoration: none;
-    color: var(--preto);
-    font-weight: 600;
-    font-size: 15px;
-    transition: color 0.3s ease;
-}
-
-.menu .link a:hover {
-    color: rgb(214, 171, 41);
-}
 
 .navbar-right {
     display: flex;
@@ -233,6 +240,53 @@ header {
     gap: 15px;
     margin-bottom: 15px;
 }
+/* ===== MENU DESKTOP (restaurando o estilo original) ===== */
+.menu-desktop {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-right: 180px;
+    padding: 0;
+}
+
+/* Cada item do menu */
+.menu-desktop .link {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Separador entre os itens */
+.menu-desktop li:not(:last-child)::after {
+    content: "|";
+    margin-left: 25px;
+    color: var(--banco-cinza);
+    font-weight: 300;
+}
+
+/* Links */
+.menu-desktop .link a {
+    text-decoration: none;
+    color: var(--preto);
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+
+/* Hover nos links */
+.menu-desktop .link a:hover {
+    color: rgb(214, 171, 41);
+}
+
+/* ===== RESPONSIVIDADE (esconde menu desktop em telas pequenas) ===== */
+@media (max-width: 991px) {
+    .menu-desktop {
+        display: none !important;
+    }
+}
+
 
 
 .carrinho img {
@@ -277,31 +331,6 @@ header {
 
 .btn-carrinho:active {
     transform: scale(0.9);
-}
-
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 950px) {
-    .navbar-bottom {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .menu {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .menu li:not(:last-child)::after {
-        content: none;
-    }
-
-    .buscar {
-        width: 80%;
-    }
-
-    .logo {
-        height: 60px;
-    }
 }
 
 /* ===== ANIMAÇÃO SCROLL ===== */
