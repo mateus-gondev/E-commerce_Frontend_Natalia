@@ -1,1 +1,30 @@
-/**Responsividade aqui*/
+/**Ainda nao ta legal desculpas prof rodrigo*/
+@media (max-width: 991px) {
+    .carousel-item {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-group {
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+    }
+
+    .card {
+        width: 85%;
+        max-width: 330px;
+        margin: 0 auto;
+    }
+
+    .carousel-inner {
+        overflow: hidden;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        top: 45%;
+    }
+}

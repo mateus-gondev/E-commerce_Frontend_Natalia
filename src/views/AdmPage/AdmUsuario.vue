@@ -9,32 +9,41 @@
 
         <div class="buscar">
             <img src="@/assets/icons/iconLupa.png" alt="Buscar" />
-            <input type="text" placeholder="Encontre sua joia..." />
+            <input
+            type="text"
+            v-model="termoBusca"
+            placeholder="Encontre Usuário..."
+            />
         </div>
 
-        <table class="tabela-usuarios">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Cargo</th>
-                <th>Ações</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="user in usuarios" :key="user.id">
-                <td>{{ user.id }}</td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.cargo }}</td>
-                <td>
-                <button class="btn-edit" @click="abrirModal(user)">Editar</button>
-                <button class="btn-delete" @click="abrirModalExcluir(user)">Excluir</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="cont-tabela" v-if="usuariosFiltrados.length > 0">
+            <table class="tabela-usuarios">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Cargo</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="user in usuarios" :key="user.id">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.cargo }}</td>
+                    <td>
+                    <button class="btn-edit" @click="abrirModal(user)">Editar</button>
+                    <button class="btn-delete" @click="abrirModalExcluir(user)">Excluir</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mensagem-vazia" v-else>
+            <p> Nenhum usuário cadastrado no momento.</p>
+        </div>
 
         <!-- Modal de Edição / Cadastro -->
         <div v-if="modalAberto" class="modal">
@@ -97,6 +106,19 @@ export default {
         };
     },
 
+    computed: {
+        usuariosFiltrados() {
+            if (!this.termoBusca) return this.usuarios;
+            const termo = this.termoBusca.toLowerCase();
+            return this.usuarios.filter(
+                (u) =>
+                u.name.toLowerCase().includes(termo) ||
+                u.email.toLowerCase().includes(termo) ||
+                u.cargo.toLowerCase().includes(termo)
+            );
+        },
+    },
+
     mounted() {
         this.carregarUsuarios();
     },
@@ -122,9 +144,9 @@ export default {
     },
 
     fecharModal() {
-      this.modalAberto = false;
-      this.modoEdicao = false;
-      this.usuarioAtual = { id: null, name: "", email: "", password: "", cargo: "" };
+        this.modalAberto = false;
+        this.modoEdicao = false;
+        this.usuarioAtual = { id: null, name: "", email: "", password: "", cargo: "" };
     },
 
     async salvarUsuario(dados) {
@@ -156,8 +178,10 @@ export default {
     },
 
     fecharModalExcluir() {
-        
+        this.modalExcluirAberto = false
+        this.usuarioAtual = { id: null, name: "", email: "", password: "", cargo: "" }
     },
+
 
     async excluirUsuario() {
         try {
@@ -216,6 +240,13 @@ export default {
     color: var(--preto);
     width: 100%;
     font-size: 14px;
+}
+
+.mensagem-vazia {
+    text-align: center;
+    padding: 2rem;
+    color: #777;
+    font-style: italic;
 }
 
 /* Conteúdo principal */

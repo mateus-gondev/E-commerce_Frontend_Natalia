@@ -71,7 +71,7 @@
                 <ModalLogin ref="modalRef" />
             </div>
 
-            <!-- Menu Celular  -->
+            <!-- Menu Celular em ajustes -->
             <div class="menu-mobile" v-if="menuAberto">
                 <div class="menu-overlay" @click="toggleMenu"></div>
                 <div class="menu-content">

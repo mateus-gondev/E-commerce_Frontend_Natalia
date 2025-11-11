@@ -1,4 +1,4 @@
-/* Ícone hamburguer */
+/* Ícone hamburguer ainda em ajsutes!! */
 .icon-menu {
     display: none;
     width: 30px;
@@ -62,7 +62,6 @@
     font-weight: 600;
 }
 
-/* Botão entrar dentro do menu mobile */
 .menu-login-mobile {
     margin-top: 0.7rem;
     display: flex;
@@ -72,7 +71,6 @@
 }
 
 
-/* Animação lateral */
 @keyframes slideIn {
     from {
         transform: translateX(100%);
@@ -83,15 +81,42 @@
     }
 }
 
-/* RESPONSIVIDADE */
+
 @media (max-width: 991px) {
-    .icon-menu {
-        display: block;
+    .menu-login-mobile .btn-Entrar {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background-color: #141414;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 18px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+        gap: 8px;
+        width: 100%;
+        margin-top: 2rem;
     }
 
-    .buscar,
-    .menu-desktop,
-    .navbar-right {
-        display: none !important;
+    .menu-login-mobile .btn-Entrar img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .menu-login-mobile .btn-Entrar:hover {
+        background-color: #333;
+    }
+
+    /* Garante que o container apareça */
+    .menu-login-mobile {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        padding-bottom: 2rem;
     }
 }
+
