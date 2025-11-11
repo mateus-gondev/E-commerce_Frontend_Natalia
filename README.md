@@ -10,6 +10,44 @@ Projeto de E-commerce em desenvolvido com **VUE JS**, com o objetivo de criar um
 
 ---
 
+## 🚀 Funcionalidades Implementadas
+**Home Page**
+- Estruturada com componentes dinâmicos.
+- Seções de produtos, categorias e carrosséis.
+- Responsividade (em ajustes finais).
+
+**Autenticação**
+- Sistema de **cadastro e login** funcional.
+- Armazenamento do nome do usuário logado via **LocalStorage**.
+- Exibição condicional do nome do usuário no header.
+
+**Administração**
+- Página administrativa acessível via rota:  
+  ```
+  /adm
+  ```
+- **(Ainda sem restrição de rotas)** – qualquer usuário pode acessar diretamente via URL.
+
+**Design & Responsividade**
+- Interface otimizada para desktop e mobile em andamento.
+- Menu hamburguer com navegação em andamento.
+- Ajustes de responsividade em andamento.
+
+---
+
+## 🌐 Integração com API
+
+O frontend está **conectado ao backend via Axios**, consumindo dados e rotas disponibilizadas pela API.
+
+- Backend desenvolvido em **Flask** (Python)
+- Banco de dados utilizado: **MySQL**
+- Comunicação realizada por **requisições HTTP (REST API)**
+
+📘 Mais detalhes sobre a estrutura e endpoints da API podem ser encontrados no arquivo  
+[`README.md` do Backend](../backend/README.md)
+
+---
+
 ## 🚀 Como executar o projeto
 
 Siga o passo a passo abaixo para configurar e executar o projeto corretamente em sua máquina.
@@ -18,10 +56,18 @@ Siga o passo a passo abaixo para configurar e executar o projeto corretamente em
 
 ```bash
 git clone https://github.com/mateus-gondev/E-commerce_Frontend_Natalia.git
-cd E-commerce_Frontend_Natalia #Nome da pasta do projeto
+cd E-commerce_Frontend_Natalia #Ou nome da pasta do projeto
 ```
 
 ### 2️ Instalar as dependências
+
+**Ter Node.Js instalado no projeto**
+
+Site com passo a passo completo -> https://nodejs.org/en/download
+```bash
+node -v # Versão node
+```
+
 ```bash
 npm install
  
@@ -73,7 +119,3 @@ git push origin main # Envia suas alterações para o repositório
 ```
 
 ---
-
-### 🗄️ Banco de Dados
-O projeto utiliza MySQL Server em conjunto com o MySQL Workbench.
-⚠️ Observação: o banco de dados ainda está em desenvolvimento.
