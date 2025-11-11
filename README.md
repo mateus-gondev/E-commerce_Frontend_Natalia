@@ -44,7 +44,7 @@ O frontend está **conectado ao backend via Axios**, consumindo dados e rotas di
 - Comunicação realizada por **requisições HTTP (REST API)**
 
 📘 Mais detalhes sobre a estrutura e endpoints da API podem ser encontrados no arquivo  
-[`README.md` do Backend](./backend/README.md)
+[`README.md` do Backend](https://github.com/mateus-gondev/E-commerce_Frontend_Natalia/blob/mateus/backend/README.md)
 
 ---
 
