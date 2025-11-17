@@ -1,30 +1,29 @@
 /**Ainda nao ta legal desculpas prof rodrigo*/
 @media (max-width: 991px) {
-    .carousel-item {
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
-    }
 
     .card-group {
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
-        gap: 0;
+        display: block !important;
+        width: 100% !important;
+        gap: 0 !important;
     }
 
     .card {
-        width: 85%;
-        max-width: 330px;
-        margin: 0 auto;
+        width: 90% !important;
+        margin: 0 auto 20px auto !important;
     }
 
-    .carousel-inner {
-        overflow: hidden;
+    .card img,
+    .card-img-top {
+        height: 260px !important;
+        object-fit: cover !important;
     }
 
-    .carousel-control-prev,
-    .carousel-control-next {
-        top: 45%;
+    .carousel-item {
+        text-align: center;
+    }
+
+    .btn-primary {
+        width: 70%;
+        margin: 10px auto 0 auto;
     }
 }

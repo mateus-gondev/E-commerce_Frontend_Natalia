@@ -136,7 +136,6 @@ img {
     color: #fff;
 }
 
-/* Imagem do produto */
 img {
     max-height: 420px;
     object-fit: cover;
@@ -144,7 +143,6 @@ img {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Informações do produto */
 h2 {
     font-size: 2rem;
     font-weight: 700;
@@ -162,7 +160,6 @@ p {
     font-weight: 600;
 }
 
-/* Botões principais */
 .btn.btn-primary {
     background-color: #b28b49;
     border: none;
@@ -192,6 +189,10 @@ p {
     .container-detalhes {
         margin-top: 120px;
         padding: 20px;
+    }
+
+    .btn-outline-primary{
+        margin-top: 120px;
     }
 
     img {
