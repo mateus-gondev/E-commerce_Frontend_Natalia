@@ -5,6 +5,7 @@ from routes import bp as api_bp
 from models import *
 from flask_cors import CORS
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
