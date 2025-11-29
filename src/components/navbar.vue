@@ -247,7 +247,7 @@ header {
     align-items: center;
     justify-content: center;
     gap: 25px;
-    margin-right: 180px;
+    margin-right: 150px;
     padding: 0;
 }
 
