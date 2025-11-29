@@ -1,9 +1,9 @@
 <template>
     <div class="adm-layout">
         <AdmNavbar />
-        <main class="adm-content">
-            <AdmPedidos />
-        </main>
+    </div>
+    <div>
+        <router-view />
     </div>
 </template>
 

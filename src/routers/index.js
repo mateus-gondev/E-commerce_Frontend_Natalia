@@ -1,60 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue';
-import ProdutoDetalhe from '../views/ProdutoDetalhe.vue';
-import Login from '../views/LoginPage/Login.vue';
-import Cadastro from '../views/LoginPage/Cadastro.vue';
-import Redefinir from '../views/LoginPage/Redefinir.vue';
-import AdmHome from '../views/AdmPage/AdmHome.vue';
-import AdmUsuario from '../views/AdmPage/AdmUsuario.vue';
+import adm_routers from './adm_routers';
+import logins_routers from './logins_routers';
+import home_routers from './home_routers';
 
 const routes = [
-    {
-        path: '/',
-        name: 'Home',
-        component: Home,
-    },
-    //Rota detalhe do produto
-    { 
-        path: '/produto/:id',
-        name: 'ProdutoDetalhe',
-        component: ProdutoDetalhe 
-    },
-    //Rota Login
-    {
-        path: '/login',
-        name: 'Login',
-        component: Login,
-    },
-    //Rota Cadastro
-    {
-        path: '/cadastro',
-        name: 'Cadastro',
-        component: Cadastro,
-    },
-    //Rota redefinir
-    {
-        path: '/redefinir',
-        name: 'Redefinir',
-        component: Redefinir,
-    },
-    //Rotas ADM ----------------------------------
-        {
-        path: '/adm',
-        name: 'AdmHome',
-        component: AdmHome,
-        },
-        {
-        path: '/adm/usuario',
-        name: 'AdmUsuario',
-        component: AdmUsuario,
-        },
-        {
-        path: '/adm/usuario/novo',
-        name: 'AdmForm',
-        component: () => import('@/views/AdmPage/AdmForm.vue')
-        }
-
+    ...adm_routers,
+    ...logins_routers,
+    ...home_routers
 ];
+
 
 const router = createRouter({
     history: createWebHistory(),
