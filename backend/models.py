@@ -3,8 +3,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
 #Modelo Usuario/cliente
-class User(db.Model):
-    __tablename__ = "users"
+class Usuarios(db.Model):
+    __tablename__ = "usuarios"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False, index=True)

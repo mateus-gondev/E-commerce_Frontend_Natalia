@@ -1,9 +1,10 @@
-from flask import Flask
+from flask import Flask, app
 from config import Config
-from extensions import db, migrate, cors
+from extensions import db, migrate
 from routes import bp as api_bp
 from models import *
 from flask_cors import CORS
+import os
 
 
 def create_app():
@@ -23,6 +24,7 @@ def create_app():
     return app
 
 if __name__ == "__main__":
+    app = create_app() 
     app.run(host="0.0.0.0", port=5000,debug=True)
 
 

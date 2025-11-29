@@ -2,6 +2,7 @@
 <template>
   <div class="adm-layout">
     <AdmNavbar />
+  </div>
     <main class="adm-content">
       <div class="form-container">
         <h1>{{ modoEdicao ? "Editar Usuário" : "Cadastrar Novo Usuário" }}</h1>
@@ -38,7 +39,7 @@
         </form>
       </div>
     </main>
-  </div>
+  
 </template>
 
 <script>

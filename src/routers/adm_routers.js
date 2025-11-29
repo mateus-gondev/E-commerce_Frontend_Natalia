@@ -9,6 +9,11 @@ export default [
             component: () => import('@/components/Adm/AdmPedidos.vue')
             },
             {
+            path: 'produtos',
+            name: 'AdmProdutos',
+            component: () => import('@/views/AdmPage/AdmProdutos.vue')
+            },
+            {
             path: 'usuario',
             name: 'AdmUsuario',
             component: () => import('@/views/AdmPage/AdmUsuario.vue')

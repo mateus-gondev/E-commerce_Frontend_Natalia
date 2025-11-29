@@ -18,7 +18,7 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="#">
+                    <router-link to="/adm/produtos">
                     <img src="@/assets/icons/iconProdutos.png" alt="Produtos" />
                     Produtos
                     </router-link>
