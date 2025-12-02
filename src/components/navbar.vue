@@ -238,7 +238,7 @@ header {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 15px;  
 }
 /* ===== MENU DESKTOP (restaurando o estilo original) ===== */
 .menu-desktop {

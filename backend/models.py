@@ -27,3 +27,4 @@ class Usuarios(db.Model):
             "cargo": self.cargo,
             "created_at": self.created_at.isoformat(),
         }
+        
