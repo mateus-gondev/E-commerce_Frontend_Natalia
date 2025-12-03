@@ -1,4 +1,4 @@
-<!--O Form é para criar-editar-remover pelo painel administrativo.-->
+<!--O Form do USUARIO painel administrativo.-->
 <template>
   <div class="adm-layout">
     <AdmNavbar />

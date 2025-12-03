@@ -14,6 +14,11 @@ export default [
             component: () => import('@/views/AdmPage/AdmProdutos.vue')
             },
             {
+            path: 'produto/novo',
+            name: 'AdmFormProduto',
+            component: () => import('@/views/AdmPage/Forms/AdmFormProduto.vue')
+            },
+            {
             path: 'usuario',
             name: 'AdmUsuario',
             component: () => import('@/views/AdmPage/AdmUsuario.vue')
@@ -21,8 +26,9 @@ export default [
             {
             path: 'usuario/novo',
             name: 'AdmForm',
-            component: () => import('@/views/AdmPage/AdmForm.vue')
+            component: () => import('@/views/AdmPage/Forms/AdmForm.vue')
             }
+            
         ]
     }
 ];

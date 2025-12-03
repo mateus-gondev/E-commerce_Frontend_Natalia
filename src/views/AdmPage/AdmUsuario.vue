@@ -2,88 +2,89 @@
     <div class="adm-layout">
         <AdmNavbar />
         <main class="adm-content">
-        <div class="header">
-            <h1>Lista Usuários</h1>
-            <button class="btn-add" @click="irParaFormulario()">+ Novo Usuário</button>
-        </div>
-
-        <div class="buscar">
-            <img src="@/assets/icons/iconLupa.png" alt="Buscar" />
-            <input
-            type="text"
-            v-model="termoBusca"
-            placeholder="Encontre Usuário..."
-            />
-        </div>
-
-        <div class="cont-tabela" v-if="usuariosFiltrados.length > 0">
-            <table class="tabela-usuarios">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Cargo</th>
-                    <th>Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="user in usuarios" :key="user.id">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.cargo }}</td>
-                    <td>
-                    <button class="btn-edit" @click="abrirModal(user)">Editar</button>
-                    <button class="btn-delete" @click="abrirModalExcluir(user)">Excluir</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="mensagem-vazia" v-else>
-            <p> Nenhum usuário cadastrado no momento.</p>
-        </div>
-
-        <!-- Modal de Edição / Cadastro -->
-        <div v-if="modalAberto" class="modal">
-            <div class="modal-content">
-            <h3>{{ modoEdicao ? "Editar Usuário" : "Novo Usuário" }}</h3>
-
-            <label>Nome:</label>
-            <input v-model="usuarioAtual.name" type="text" placeholder="Nome" />
-
-            <label>Email:</label>
-            <input v-model="usuarioAtual.email" type="email" placeholder="E-mail" />
-
-            <label>Cargo:</label>
-            <select v-model="usuarioAtual.cargo">
-                <option disabled value="">Selecione um cargo</option>
-                <option value="Administrador">Administrador</option>
-                <option value="Funcionario">Funcionário</option>
-                <option value="Cliente">Cliente</option>
-            </select>
-
-            <label>Senha (opcional para editar):</label>
-            <input v-model="usuarioAtual.password" type="password" placeholder="Senha" />
-
-            <div class="modal-actions">
-                <button @click="salvarUsuario(usuarioAtual)">Salvar</button>
-                <button @click="fecharModal()">Cancelar</button>
+            <div class="header">
+                <h1>Lista Usuários</h1>
+                <button class="btn-add" @click="irParaFormulario()">+ Novo Usuário</button>
             </div>
-            </div>
-        </div>
 
-        <!-- Modal de Exclusão -->
-        <div v-if="modalExcluirAberto" class="modal">
-            <div class="modal-content">
-            <h3>Deseja realmente excluir {{ usuarioAtual.name }}?</h3>
-            <div class="modal-actions">
-                <button @click="excluirUsuario()">Sim</button>
-                <button @click="fecharModalExcluir()">Cancelar</button>
+            <div class="buscar">
+                <img src="@/assets/icons/iconLupa.png" alt="Buscar" />
+                <input
+                type="text"
+                v-model="termoBusca"
+                placeholder="Encontre Usuário..."
+                />
             </div>
+
+            <div class="cont-tabela" v-if="usuariosFiltrados.length > 0">
+                <table class="tabela-usuarios">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Cargo</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="user in usuarios" :key="user.id">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.cargo }}</td>
+                        <td>
+                        <button class="btn-edit" @click="abrirModal(user)">Editar</button>
+                        <button class="btn-delete" @click="abrirModalExcluir(user)">Excluir</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
+
+            <div class="mensagem-vazia" v-else>
+                <p> Nenhum usuário encontrado no momento.</p>
+            </div>
+
+            <!-- Modal de Edição / Cadastro -->
+            <div v-if="modalAberto" class="modal">
+                <div class="modal-content">
+                    <h3>{{ modoEdicao ? "Editar Usuário" : "Novo Usuário" }}</h3>
+
+                    <label>Nome:</label>
+                    <input v-model="usuarioAtual.name" type="text" placeholder="Nome" />
+
+                    <label>Email:</label>
+                    <input v-model="usuarioAtual.email" type="email" placeholder="E-mail" />
+
+                    <label>Cargo:</label>
+                    <select v-model="usuarioAtual.cargo">
+                        <option disabled value="">Selecione um cargo</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Funcionario">Funcionário</option>
+                        <option value="Cliente">Cliente</option>
+                    </select>
+
+                    <label>Senha (opcional para editar):</label>
+                    <input v-model="usuarioAtual.password" type="password" placeholder="Senha" />
+
+                    <div class="modal-actions">
+                        <button @click="salvarUsuario(usuarioAtual)">Salvar</button>
+                        <button @click="fecharModal()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal de Exclusão -->
+            <div v-if="modalExcluirAberto" class="modal">
+                <div class="modal-content">
+                    <h3>Deseja realmente excluir {{ usuarioAtual.name }}?</h3>
+                    <div class="modal-actions">
+                        <button @click="excluirUsuario()">Sim</button>
+                        <button @click="fecharModalExcluir()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </template>
@@ -91,7 +92,7 @@
 <script>
 import api from "@/services/api";
 import AdmNavbar from "../../components/Adm/AdmNavbar.vue";
-import AdmForm from "../AdmPage/AdmForm.vue";
+import AdmForm from "../AdmPage/Forms/AdmForm.vue";
 
 export default {
     name: "AdmUsuario",

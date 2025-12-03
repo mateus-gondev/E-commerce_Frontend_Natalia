@@ -28,3 +28,20 @@ class Usuarios(db.Model):
             "created_at": self.created_at.isoformat(),
         }
         
+class Produtos(db.Model):
+    __tablename__ = "produtos"
+    id_produto = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    image = db.Column(db.String(256), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    def to_dict(self):
+        return {
+            "id_produto": self.id_produto,
+            "name": self.name,
+            "description": self.description,
+            "price": self.price,
+            "image": self.image,
+        }
