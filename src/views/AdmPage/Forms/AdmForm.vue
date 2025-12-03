@@ -44,7 +44,7 @@
 
 <script>
 import api from "@/services/api";
-import AdmNavbar from "../../components/Adm/AdmNavbar.vue";
+import AdmNavbar from "@/components/Adm/AdmNavbar.vue";
 
 export default {
   name: "AdmForm",

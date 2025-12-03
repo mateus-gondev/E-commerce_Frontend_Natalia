@@ -91,7 +91,7 @@
 
 <script>
 import api from "@/services/api";
-import AdmNavbar from "../../components/Adm/AdmNavbar.vue";
+import AdmNavbar from "@/components/Adm/AdmNavbar.vue";
 import AdmForm from "../AdmPage/Forms/AdmForm.vue";
 
 export default {

@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from extensions import db
-from models import Usuarios
+from models import Produtos, Usuarios
 from werkzeug.security import generate_password_hash, check_password_hash
 
 bp = Blueprint("api", __name__, url_prefix="/api")
@@ -111,3 +111,61 @@ def delete_user(id):
     db.session.delete(user)
     db.session.commit()
     return jsonify({"message": "Usuário deletado com sucesso!"}), 200
+
+# FUNCOES RELACIONADA AOS PRODUTOS ---
+@bp.route('/product', methods=['GET'])
+def get_products():
+    products = Produtos.query.all()
+    product_list = []
+    for product in products:
+        product_list.append({
+            "id_produto": product.id_produto,
+            "name": product.name,
+            "description": product.description,
+            "price": product.price,
+            "image": product.image
+        })
+    return jsonify(product_list), 200
+
+# CRIAR
+@bp.route('/product', methods=['POST'])
+def create_product():
+    data = request.get_json()
+    name = data.get('name')
+    description = data.get('description')
+    price = data.get('price')
+    image = data.get('image')
+
+    novo_produto = Produtos(
+        name=name,
+        description=description,
+        price=price,
+        image=image
+    )
+    db.session.add(novo_produto)
+    db.session.commit()
+
+    return jsonify({"message": "Produto criado com sucesso!"}), 201
+
+#EDITAR
+@bp.route('/product/<int:id>', methods=['PUT'])
+def update_product(id):
+    product = Produtos.query.get_or_404(id)
+    data = request.get_json()
+
+    product.name = data.get('name', product.name)
+    product.description = data.get('description', product.description)
+    product.price = data.get('price', product.price)
+    product.image = data.get('image', product.image)
+
+    db.session.commit()
+
+    return jsonify({"message": "Produto atualizado com sucesso!"}), 200
+
+#EXCLUIR
+@bp.route('/product/<int:id>', methods=['DELETE'])
+def delete_product(id):
+    product = Produtos.query.get_or_404(id)
+    db.session.delete(product)
+    db.session.commit()
+    return jsonify({"message": "Produto deletado com sucesso!"}), 200
