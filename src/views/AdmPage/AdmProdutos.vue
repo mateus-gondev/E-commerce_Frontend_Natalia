@@ -30,12 +30,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="produto in produtos" :key="produto.id_produtos">
-                            <td>{{ produto.id_produtos }}</td>
-                            <td>{{ produto.nome }}</td>
-                            <td>{{ produto.descricao }}</td>
-                            <td>{{ produto.preco }}</td>
-                            <td>{{ produto.imagem_url }}</td>
+                        <tr v-for="produto in produtos" :key="produto.id_produto">
+                            <td>{{ produto.id_produto }}</td>
+                            <td>{{ produto.name }}</td>
+                            <td>{{ produto.description }}</td>
+                            <td>{{ formatarPreco(produto.price) }}</td>
+                            <td>
+                                <a :href="produto.image" target="_blank">Ver imagem</a>
+                            </td>
+
                             <td>
                                 <button class="btn-edit" @click="abrirModal(produto)">Editar</button>
                                 <button class="btn-delete" @click="abrirModalExcluir(produto)">Excluir</button>
@@ -55,16 +58,16 @@
                     <h3>{{ modoEdicao ? 'Editar Produto' : 'Novo Produto' }}</h3>
                     
                     <label>Nome:</label>
-                    <input v-model="produto.name" type="text" placeholder="Nome">
+                    <input v-model="produtoAtual.name" type="text" placeholder="Nome">
 
                     <label>Descrição:</label>
-                    <input v-model="produto.description" type="text" placeholder="Descrição">
+                    <input v-model="produtoAtual.description" type="text" placeholder="Descrição">
 
                     <label>Preço:</label>
-                    <input v-model="produto.prince" type="number" placeholder="Preço">
+                    <input v-model="produtoAtual.price" type="number" placeholder="Preço">
 
                     <label>Imagem URL:</label>
-                    <input v-model="produto.image" type="text" placeholder="Imagem URL">
+                    <input v-model="produtoAtual.image" type="text" placeholder="Imagem URL">
 
                     <div class="modal-actions">
                         <button @click="salvarProduto(produtoAtual)">Salvar</button>
@@ -99,7 +102,7 @@ export default {
     data(){
         return {
             produtos: [],
-            produtoAtual: { id_produto: null, name: "", description: "", prince: "", image: ""},
+            produtoAtual: { id_produto: null, name: "", description: "", price: "", image: ""},
             modalAberto: false,
             modalExcluirAberto: false,
             modoEdicao: false,
@@ -113,7 +116,7 @@ export default {
                 (u) =>
                 u.name.toLowerCase().includes(termo) ||
                 u.description.toLowerCase().includes(termo) ||
-                u.prince.toLowerCase().includes(termo)
+                u.price.toLowerCase().includes(termo)
             );
         },
     },
@@ -145,7 +148,7 @@ export default {
         fecharModal(){
             this.modalAberto = false;
             this.modoEdicao = false;
-            this.produtoAtual = {id_produto: null, name: "", description: "", prince: "", image: ""}
+            this.produtoAtual = {id_produto: null, name: "", description: "", price: "", image: ""}
         },
 
         async salvarProduto(dados){
@@ -154,7 +157,7 @@ export default {
                     await api.put(`/product/${this.produtoAtual.id_produto}`,{
                         name: this.produtoAtual.name,
                         description: this.produtoAtual.description,
-                        prince: this.produtoAtual.prince,
+                        price: this.produtoAtual.price,
                         image: this.produtoAtual.image,
                     });
                     alert("Produto atualizado com sucesso!");                
@@ -177,8 +180,8 @@ export default {
         },
 
         fecharModalExcluir(){
-            this.ModalExcluirAberto = false
-            this.produtoAtual = {id_produto: null, name: "", description: "", prince: "", image: ""}
+            this.modalExcluirAberto = false
+            this.produtoAtual = {id_produto: null, name: "", description: "", price: "", image: ""}
         },
 
         async excluirProduto(){
@@ -191,6 +194,16 @@ export default {
                 console.error("Erro ao excluir produto:", error);
             }
         },
+
+        formatarPreco(valor) {
+            if (!valor) return "0,00 R$";
+            return Number(valor).toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            });
+            }
+
+
     },
 };
 </script>
@@ -234,7 +247,6 @@ export default {
     color: #333;
 }
 
-/* Conteúdo principal */
 .adm-content {
     margin-left: 250px;
     padding: 2rem;
@@ -329,7 +341,6 @@ export default {
     background-color: #c0392b;
 }
 
-/* Caso vazio */
 .mensagem-vazia {
     text-align: center;
     padding: 2rem;

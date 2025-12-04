@@ -89,80 +89,76 @@ export default {
 </script>
 
 <style scoped>
-/* Layout geral */
+
 .adm-content {
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
 }
 
-/* Container geral do form */
 .form-container {
-  background: #fff;
-  border-radius: 12px;
-  padding: 2rem;
-  max-width: 600px;
-  width: 100%;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* Título */
 .form-container h1 {
-  margin-bottom: 1.5rem;
-  font-size: 1.6rem;
-  color: #2c3e50;
-  text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+    color: #2c3e50;
+    text-align: center;
 }
 
-/* Grupo de campos */
 .form-group {
-  margin-bottom: 1.2rem;
+    margin-bottom: 1.2rem;
 }
 
 label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    }
 
 input, select {
-  width: 100%;
-  padding: 0.6rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
-}
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    }
 
-/* Botões */
 .acoes {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
 }
 
 .btn-save {
-  background-color: #2c3e50;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+    background-color: #2c3e50;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .btn-save:hover {
-  background-color: #34495e;
+    background-color: #34495e;
 }
 
 .btn-cancel {
-  background-color: #ddd;
-  color: #333;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+    background-color: #ddd;
+    color: #333;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .btn-cancel:hover {
-  background-color: #bbb;
+    background-color: #bbb;
 }
 </style>
