@@ -112,7 +112,7 @@ def delete_user(id):
     db.session.commit()
     return jsonify({"message": "Usuário deletado com sucesso!"}), 200
 
-# FUNCOES RELACIONADA AOS PRODUTOS ---
+# FUNCOES RELACIONADA AOS PRODUTOS ----------------------------------------------------------
 @bp.route('/product', methods=['GET'])
 def get_products():
     products = Produtos.query.all()
@@ -168,4 +168,4 @@ def delete_product(id):
     product = Produtos.query.get_or_404(id)
     db.session.delete(product)
     db.session.commit()
-    return jsonify({"message": "Produto deletado com sucesso!"}), 200
+    return jsonify({"message": "Produto deletado com sucesso!"}), 200 
