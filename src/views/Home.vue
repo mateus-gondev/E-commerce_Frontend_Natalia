@@ -138,7 +138,7 @@ export default {
             detalhes: [
                 {
                 img: "https://img.icons8.com/ios-filled/50/star--v1.png",
-                title: "Qualidade Premium",
+                title: "Qualidade ",
                 subtitle: "Apenas as melhores pedras e metais preciosos"
                 },
                 {

@@ -76,24 +76,23 @@
 </template>
 
 <script>
+import axios from "axios";
 import "../assets/css/responsivo/cards_responsivo.css";
 
 export default {
     name: "Cards",
+
     data() {
         return {
-            cards: [
-                { id: 1, img:"https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_encanto_2mm_anel_solitario_109_1_80e2a18588a47e1153771a7cb2a33777.jpeg", title:"Anel Brilhante", desc:"Anel delicado em ouro 18k com pedras de zircônia.", preco:"R$ 200,00" },
-                { id: 2, img:"https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_dulce_2mm_anel_solitario_103_1_b27b4a8587b80ff651e130218bd63b7e.jpeg", title:"Anel Ouro Rosé", desc:"Anel romântico com banho de ouro rosé.", preco:"R$ 320,00" },
-                { id: 3, img:"https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_casamento_italian_ouro_10k_1_5mm_anel_brinde_715_1_df6ce4eab3b68f75bd641d92fe52ab42.jpeg", title:"Anel Clássico", desc:"Anel em ouro 10k, símbolo de união e elegância.", preco:"R$ 180,00" },
-                { id: 4, img:"https://images.tcdn.com.br/img/img_prod/1373873/180_aliancas_de_namoro_mini_encanto_2mm_anel_solitario_109_1_80e2a18588a47e1153771a7cb2a33777.jpeg", title:"Anel Minimalista", desc:"Design simples e elegante para o dia a dia.", preco:"R$ 250,00" },
-            ],
-            slides: [], 
+            cards: [],      // Agora vazio (preenchido pelo backend)
+            slides: [],
         };
     },
 
-    mounted() {
+    async mounted() {
+        await this.carregarCards();
         this.generateSlides();
+
         window.addEventListener("resize", this.generateSlides);
     },
 
@@ -102,13 +101,32 @@ export default {
     },
 
     methods: {
+        async carregarCards() {
+            try {
+                const response = await axios.get("http://10.100.0.158:5000/api/product");
+
+                const produtos = response.data;
+
+                // Adapta os nomes para o Vue (se quiser manter os mesmos nomes antigos)
+                this.cards = produtos.map((p) => ({
+                    id: p.id_produto,
+                    img: p.image,
+                    title: p.name,
+                    desc: p.description,
+                    preco: `R$ ${p.price}`,
+                }));
+            } catch (error) {
+                console.error("Erro ao carregar os cards:", error);
+            }
+        },
+
         generateSlides() {
             const width = window.innerWidth;
-            let chunkSize = 4;
 
-            if (width < 768) chunkSize = 1;      //  Aqui pro Mobile
-            else if (width < 992) chunkSize = 2; // Tablet 
-            else chunkSize = 4;                  // PCs
+            let chunkSize = 4;
+            if (width < 768) chunkSize = 1;
+            else if (width < 992) chunkSize = 2;
+            else chunkSize = 4;
 
             const tempSlides = [];
             for (let i = 0; i < this.cards.length; i += chunkSize) {
@@ -124,6 +142,7 @@ export default {
     },
 };
 </script>
+
 
 
 <style scoped>
