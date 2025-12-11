@@ -21,7 +21,6 @@
                     <h5 class="card-title">{{ card.title }}</h5>
                     <p class="card-text">{{ card.desc }}</p>
                     <p class="card-preco">{{ card.preco }}</p>
-                    <a href="#" class="btn btn-primary">Adicionar</a>
                 </div>
                 </div>
             </div>
@@ -45,7 +44,7 @@
                     <h5 class="card-title">{{ card.title }}</h5>
                     <p class="card-text">{{ card.desc }}</p>
                     <p class="card-preco">{{ card.preco }}</p>
-                    <a href="#" class="btn btn-primary">Adicionar</a>
+                    <button class="btn btn-primary mt-3 me-2" @click="addProduto(produto)">Adicionar ao Carrinho</button>
                 </div>
                 </div>
             </div>
@@ -86,6 +85,8 @@ export default {
         return {
             cards: [],      // Agora vazio (preenchido pelo backend)
             slides: [],
+            produto: null,
+            produtos: [],
         };
     },
 
@@ -139,6 +140,60 @@ export default {
         verDetalhes(id) {
             this.$router.push(`/produto/${id}`);
         },
+
+        async carregarProduto(id) {
+      try {
+        const response = await api.get("/product");
+        const produtosAPI = response.data;
+
+        // Produto atual
+        const p = produtosAPI.find(item => Number(item.id_produto) === Number(id));
+        if (!p) return;
+
+        this.produto = {
+          id: p.id_produto,
+          img: p.image,
+          title: p.name,
+          desc: p.description,
+          preco: `R$ ${p.price}`,
+        };
+
+        // Lista completa para o carrossel
+        this.produtos = produtosAPI.map(prod => ({
+          id: prod.id_produto,
+          img: prod.image,
+          title: prod.name,
+          desc: prod.description,
+          preco: `R$ ${prod.price}`,
+        }));
+
+        console.log("Produtos carregados:", this.produtos);
+      } catch (err) {
+        console.error("Erro ao carregar produto:", err);
+      }
+    },
+        addProduto(produto) {
+            cartStore.add(produto);
+            window.dispatchEvent(new Event("cart-updated"));
+            },
+
+            comprar(produto) {
+            this.addProduto(produto);
+            },
+
+            created() {
+    const id = this.$route.params.id;
+    this.carregarProduto(id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },
+
+  watch: {
+    "$route.params.id"(novoId) {
+      this.carregarProduto(novoId);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+  },
+
     },
 };
 </script>

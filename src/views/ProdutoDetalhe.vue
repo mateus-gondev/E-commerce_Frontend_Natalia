@@ -1,43 +1,42 @@
 <template>
-    <!-- NAVBAR -->
-    <div class="header">
-        <navbar />
+  <div class="header">
+    <navbar />
+  </div>
+
+  <main class="container-detalhes">
+    <div class="container py-5">
+      <router-link to="/" class="btn btn-outline-primary mb-4">
+        <i class="bi bi-arrow-left me-2"></i> Voltar à loja
+      </router-link>
+
+      <div v-if="produto" class="row align-items-center fade-in">
+        <div class="col-md-6">
+          <img :src="produto.img" class="img-fluid rounded shadow" :alt="produto.title" />
+        </div>
+        <div class="col-md-6">
+          <h2 class="mb-3">{{ produto.title }}</h2>
+          <p class="mb-4">{{ produto.desc }}</p>
+          <h4 class="text-primary mb-4">{{ produto.preco }}</h4>
+
+          <button class="btn btn-primary mt-3 me-2" @click="addProduto(produto)">Adicionar ao Carrinho</button>
+          <button class="btn btn-dark mt-3" @click="comprar(produto)">Comprar</button>
+        </div>
+      </div>
     </div>
 
-    <main class="container-detalhes">
-        <!-- DETALHE DO PRODUTO -->
-        <div class="container py-5">
+    <div class="mt-5">
+      <Cards :products="produtos" />
+    </div>
 
-        <router-link to="/" class="btn btn-outline-primary mb-4">
-            <i class="bi bi-arrow-left me-2"></i> Voltar à loja
-        </router-link>
-
-        <div v-if="produto" class="row align-items-center fade-in">
-            <div class="col-md-6">
-            <img :src="produto.img" class="img-fluid rounded shadow" :alt="produto.title" />
-            </div>
-            <div class="col-md-6">
-            <h2 class="mb-3">{{ produto.title }}</h2>
-            <p class="mb-4">{{ produto.desc }}</p>
-            <h4 class="text-primary mb-4">{{ produto.preco }}</h4>
-            <button class="btn btn-primary mt-3 me-2">Adicionar ao Carrinho</button>
-            <button class="btn btn-dark mt-3">Comprar</button>
-            </div>
-        </div>
-        </div>
-
-        <div class="mt-5">
-            <Cards />
-        </div>
-
-        <div class="mt-5">
-            <Footer />
-        </div>
-    </main>
+    <div class="mt-5">
+      <Footer />
+    </div>
+  </main>
 </template>
 
 <script>
-import axios from "axios";
+import api from "@/services/api";
+import cartStore from "@/services/cart";
 import navbar from "@/components/navbar.vue";
 import Cards from "@/components/Cards.vue";
 import Footer from "@/components/Footer.vue";
@@ -49,22 +48,50 @@ export default {
   data() {
     return {
       produto: null,
+      produtos: [],
     };
   },
 
   methods: {
     async carregarProduto(id) {
       try {
-        const response = await axios.get("http://10.100.0.158:5000/api/product");
+        const response = await api.get("/product");
+        const produtosAPI = response.data;
 
-        const produtos = response.data;
+        // Produto atual
+        const p = produtosAPI.find(item => Number(item.id_produto) === Number(id));
+        if (!p) return;
 
-        this.produto = produtos.find(
-          (p) => Number(p.id_produto) === Number(id)
-        );
+        this.produto = {
+          id: p.id_produto,
+          img: p.image,
+          title: p.name,
+          desc: p.description,
+          preco: `R$ ${p.price}`,
+        };
+
+        // Lista completa para o carrossel
+        this.produtos = produtosAPI.map(prod => ({
+          id: prod.id_produto,
+          img: prod.image,
+          title: prod.name,
+          desc: prod.description,
+          preco: `R$ ${prod.price}`,
+        }));
+
+        console.log("Produtos carregados:", this.produtos);
       } catch (err) {
         console.error("Erro ao carregar produto:", err);
       }
+    },
+
+    addProduto(produto) {
+      cartStore.add(produto);
+      window.dispatchEvent(new Event("cart-updated"));
+    },
+
+    comprar(produto) {
+      this.addProduto(produto);
     },
   },
 
@@ -82,111 +109,30 @@ export default {
   },
 };
 </script>
+
 <style scoped>
+.fade-in { animation: fadeIn 0.6s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-.fade-in {
-    animation: fadeIn 0.6s ease-in-out;
-}
+.container-detalhes { margin-top: 290px; }
+.btn-outline-primary { border-color: #b28b49; color: #b28b49; font-weight: 500; border-radius: 10px; transition: all 0.3s ease; }
+.btn-outline-primary:hover { background-color: #b28b49; color: #fff; }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-img {
-    max-height: 400px;
-    object-fit: cover;
-}
+img { max-height: 420px; object-fit: cover; border-radius: 16px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+h2 { font-size: 2rem; font-weight: 700; color: #2b2b2b; }
+p { color: #5f5f5f; font-size: 1.05rem; line-height: 1.6; }
+.text-primary { color: #b28b49 !important; font-weight: 600; }
 
-.container-detalhes {
-    margin-top: 290px;
-}
+.btn.btn-primary { background-color: #b28b49; border: none; font-weight: 600; border-radius: 10px; padding: 10px 24px; margin-right: 10px; transition: all 0.3s ease; }
+.btn.btn-primary:hover { background-color: #a17a38; transform: translateY(-2px); }
+.btn.btn-dark { background-color: #000; color: #fff; border-radius: 10px; }
+.btn.btn-dark:hover { background-color: #333; }
 
-/* Botão voltar */
-.btn-outline-primary {
-    border-color: #b28b49;
-    color: #b28b49;
-    font-weight: 500;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
-
-.btn-outline-primary:hover {
-    background-color: #b28b49;
-    color: #fff;
-}
-
-img {
-    max-height: 420px;
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #2b2b2b;
-}
-
-p {
-    color: #5f5f5f;
-    font-size: 1.05rem;
-    line-height: 1.6;
-}
-
-.text-primary {
-    color: #b28b49 !important;
-    font-weight: 600;
-}
-
-.btn.btn-primary {
-    background-color: #b28b49;
-    border: none;
-    font-weight: 600;
-    border-radius: 10px;
-    padding: 10px 24px;
-    margin-right: 10px;
-    transition: all 0.3s ease;
-}
-
-.btn.btn-primary:hover {
-    background-color: #a17a38;
-    transform: translateY(-2px);
-}
-
-.btn.btn-primary:last-of-type {
-    background-color: #000;
-    color: #fff;
-}
-
-.btn.btn-primary:last-of-type:hover {
-    background-color: #333;
-}
-
-/* Layout responsivo */
 @media (max-width: 992px) {
-    .container-detalhes {
-        margin-top: 120px;
-        padding: 20px;
-    }
-
-    .btn-outline-primary{
-        margin-top: 120px;
-    }
-
-    img {
-        max-height: 320px;
-        width: 100%;
-    }
-
-    h2 {
-        font-size: 1.7rem;
-        margin-top: 20px;
-    }
-
-    .btn.btn-primary {
-        width: 100%;
-        margin-bottom: 10px;
-    }
+  .container-detalhes { margin-top: 120px; padding: 20px; }
+  .btn-outline-primary { margin-top: 120px; }
+  img { max-height: 320px; width: 100%; }
+  h2 { font-size: 1.7rem; margin-top: 20px; }
+  .btn.btn-primary { width: 100%; margin-bottom: 10px; }
 }
 </style>
