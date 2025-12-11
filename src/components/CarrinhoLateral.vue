@@ -27,6 +27,15 @@
                     :key="item.id"
                     class="d-flex align-items-center mb-3 pb-2 border-bottom"
                 >
+                    <!-- CHECKBOX -->
+                    <input
+                        type="checkbox"
+                        class="form-check-input me-2"
+                        v-model="selectedItems"
+                        :value="item.id"
+                        style="width: 18px; height: 18px; cursor: pointer;"
+                    />
+
                     <img
                         :src="item.img"
                         alt="produto"
@@ -63,7 +72,8 @@
 
                 <button
                     class="btn btn-success w-100"
-                    :disabled="cart.length === 0"
+                    :disabled="selectedItems.length === 0"
+                    @click="finalizarCompra"
                 >
                     Finalizar Compra
                 </button>
@@ -74,6 +84,7 @@
 
 <script>
 import cartStore from "@/services/cart";
+import orderStore from "@/services/orders";
 
 export default {
     name: "CarrinhoLateral",
@@ -82,15 +93,18 @@ export default {
         return {
             carrinhoAberto: false,
             cart: [],
+            selectedItems: [], // 🔥 itens selecionados
         };
     },
 
     computed: {
         total() {
-            return this.cart.reduce((acc, item) => {
-                const preco = Number(item.preco.replace("R$", "").replace(",", "."));
-                return acc + preco * item.quantity;
-            }, 0);
+            return this.cart
+                .filter(item => this.selectedItems.includes(item.id))
+                .reduce((acc, item) => {
+                    const preco = Number(item.preco.replace("R$", "").replace(",", "."));
+                    return acc + preco * item.quantity;
+                }, 0);
         },
 
         totalFormatado() {
@@ -133,13 +147,40 @@ export default {
                 this.carregarCarrinho();
             }
         },
+
+        // 🔥 Finalizando só os selecionados
+        finalizarCompra() {
+            if (this.selectedItems.length === 0) {
+                alert("Selecione ao menos um item.");
+                return;
+            }
+
+            const itensSelecionados = this.cart.filter(item =>
+                this.selectedItems.includes(item.id)
+            );
+
+            const pedido = {
+                items: itensSelecionados,
+                total: this.total,
+            };
+
+            orderStore.addOrder(pedido);
+
+            const itensRestantes = this.cart.filter(
+                item => !this.selectedItems.includes(item.id)
+            );
+
+            localStorage.setItem("cart", JSON.stringify(itensRestantes));
+            window.dispatchEvent(new Event("cart-updated"));
+
+            this.selectedItems = [];
+
+            alert("Pedido realizado com sucesso!");
+        }
     },
 
     mounted() {
-        // Atualiza carrinho quando um produto é adicionado
         window.addEventListener("cart-updated", this.carregarCarrinho);
-
-        // Permite abrir carrinho via evento global
         window.addEventListener("open-cart", this.abrirCarrinho);
 
         this.carregarCarrinho();

@@ -8,11 +8,14 @@ const cartStore = {
 
   saveCart(cart) {
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
+
+    // 🔥 Atualiza o carrinho no componente
     window.dispatchEvent(new Event("cart-updated"));
   },
 
   add(product) {
     const cart = this.getCart();
+
     const existente = cart.find(item => item.id === product.id);
 
     if (existente) {
@@ -22,6 +25,9 @@ const cartStore = {
     }
 
     this.saveCart(cart);
+
+    // 🔥 Abre o carrinho ao adicionar produto
+    window.dispatchEvent(new Event("open-cart"));
   },
 
   remove(id) {
@@ -32,7 +38,9 @@ const cartStore = {
   changeQuantity(id, qty) {
     const cart = this.getCart();
     const item = cart.find(item => item.id === id);
+
     if (!item) return;
+
     item.quantity = qty <= 0 ? 1 : qty;
     this.saveCart(cart);
   },

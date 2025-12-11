@@ -44,7 +44,7 @@
                     <h5 class="card-title">{{ card.title }}</h5>
                     <p class="card-text">{{ card.desc }}</p>
                     <p class="card-preco">{{ card.preco }}</p>
-                    <button class="btn btn-primary mt-3 me-2" @click="addProduto(produto)">Adicionar ao Carrinho</button>
+                    <button class="btn btn-primary mt-3 me-2" @click="addProduto(produto)">Visualizar</button>
                 </div>
                 </div>
             </div>
